@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hastalapolla;
+package Patient;
 
 /**
  *
- * @author mariapalacios
+ * @author Sofia
  */
-class hola {
+class Login {
     
 }
