@@ -5,6 +5,7 @@
  */
 package Patient;
  
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,9 @@ import java.util.List;
  */
 
 //ESTE OBJETO LO PASAMOS AL SOCKET
-public class Data {
+public class Data implements Serializable{
+private static final long serialVersionUID = 1L;
+   
     public enum SYMPTOMS{NO_SYMPTOMS,BREATHING_DIFFICULTY,BREATHING_WHISTLING,CHEST_PREASSURE,INSMONIA, HEADACHE, OTHERS};
     public enum ACTIVITIES{EXERCISE,WITH_DOG,WITH_CAT,AT_HOME,SLEEPING,WORKING,OTHERS};
     public enum MEDICATION{NO_MEDICATION,RESCUE_INHALER,CONTROL_TREATMENT,ANTIHISTAMINES,IBUPROPHEN,PARACETAMOL,OTHERS};
@@ -25,8 +28,12 @@ public class Data {
     private List<SYMPTOMS>symptoms = new ArrayList();
     private List<ACTIVITIES>activities = new ArrayList();
     private List<MEDICATION>medication = new ArrayList();
-    Date date;
-
+    //Date date;
+    public Data(){
+        this.ECG = ECG;
+        this.ACC= ACC;
+        
+        }
     public ArrayList<Integer> getECG() {
         return ECG;
     }
@@ -34,7 +41,9 @@ public class Data {
     public void setECG(ArrayList<Integer> ECG) {
         this.ECG = ECG;
     }
-  
+   public void addECG(int ecg){
+        this.ECG.add(ecg);
+    }
     public ArrayList<Integer> getTime() {
         return time;
     }
@@ -50,7 +59,9 @@ public class Data {
     public void setACC(ArrayList<Integer> ACC) {
         this.ACC = ACC;
     }
-
+    public void addACC(int acc){
+        this.ACC.add(acc);
+    }
     public List<SYMPTOMS> getSymptoms() {
         return symptoms;
     }
@@ -94,17 +105,17 @@ public class Data {
     public void deleteMedication(MEDICATION symptom){
         this.symptoms.remove(symptom);
     }
-    public Date getDate() {
+    /*public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
-    }
+    }*/
      @Override
     public String toString() {
         return "Data{ " + "symptoms=" + symptoms + ", activities=" + activities + ", medication=" 
-                + medication + ", date=" + date + " }";
+                + medication + ", ECG" + ECG+ ", ACC" +ACC+ " }";
     }
     
     

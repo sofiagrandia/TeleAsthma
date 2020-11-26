@@ -39,18 +39,22 @@ public class Patient implements Serializable {
         this.login = login;
         this.gender = gender;
     }
-
-    public Patient() {
-        this.id = null;
-        this.name = null;
-        this.surname = null;
-        this.age = 0;
-        this.weight = 0;
-        this.height = 0;
-        this.asthmaType = null;
-        this.doctor = null;
+public Patient() {
+        this.id = "001";
+        this.name = "Juana";
+        this.surname = "La loca";
+        this.age = 16;
+        this.weight = 40;
+        this.height = 164;
+        this.asthmaType = "Severe";
+        this.doctor = "McDreamy";
         this.login = null;
-        this.gender = null;
+        this.gender = gender.other;
+    }
+
+    @Override
+    public String toString() {
+        return "Patient to String{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", age=" + age + ", weight=" + weight + ", height=" + height + ", asthmaType=" + asthmaType + ", doctor=" + doctor + ", login=" + login + ", gender=" + gender + '}';
     }
 
     public static long getSerialVersionUID() {

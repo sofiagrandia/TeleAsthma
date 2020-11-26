@@ -1,6 +1,16 @@
 package BITalino;
 
+import Patient.Data;
+import static Patient.Data.ACTIVITIES.EXERCISE;
+import static Patient.Data.MEDICATION.IBUPROPHEN;
+import static Patient.Data.SYMPTOMS.INSMONIA;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 
 import javax.bluetooth.RemoteDevice;
@@ -12,14 +22,34 @@ public class BitalinoDemo {
 
     public static Frame[] frame;
 
-    public static void main(String[] args) {
-        ArrayList<Integer> ECG = new ArrayList();
+   /* public static void main(String[] args) {
+        //ArrayList<Integer> ECG = new ArrayList();
+       
         ArrayList<Integer> time = new ArrayList();
         ArrayList<Integer> ACC = new ArrayList();
-
+        Data data = new Data();
         BITalino bitalino = null;
         try {
-            bitalino = new BITalino();
+            BITalinoMethod(bitalino, data, time)
+        } catch (Throwable ex) {
+            Logger.getLogger(BitalinoDemo.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                //close bluetooth connection
+                if (bitalino != null) {
+                    bitalino.close();
+                }
+            } catch (BITalinoException ex) {
+                Logger.getLogger(BitalinoDemo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }*/
+    public static Data BITalinoMethod() throws InterruptedException, BITalinoException, Throwable {
+          BITalino bitalino = new BITalino();
+          ArrayList<Integer> time = new ArrayList();
+          Data data = new Data();
+        
             // Code to find Devices
             //Only works on some OS
             Vector<RemoteDevice> devices = bitalino.findDevices();
@@ -50,33 +80,22 @@ public class BitalinoDemo {
                 //Print the samples
                 for (int i = 0; i < frame.length; i++) {
                     time.add(j*block_size+i);
-                    ECG.add(frame[i].analog[0]);
-                    ACC.add(frame[i].analog[1]);
+                    data.addECG(frame[i].analog[0]);
+                    data.addACC(frame[i].analog[1]);
                             
-        
                 }
+                data.addSymptom(INSMONIA);
+                data.addActivity(EXERCISE);
+                data.addMedication(IBUPROPHEN);
+                //data.setDate("July 21, 1983 01:15:00");
             }
             
-             for(int k = 0; k< time.size();k++){
-                System.out.println("TIEMPO: "+time.get(k)+" ECG: " + ECG.get(k)+ " ACCELEROMETER: "+ ACC.get(k));
-            }
+             
+            System.out.println("ECG: " + data.getECG()+ "\nACCELEROMETER: "+ data.getACC());
+            
             //stop acquisition
             bitalino.stop();
-        } catch (BITalinoException ex) {
-            Logger.getLogger(BitalinoDemo.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Throwable ex) {
-            Logger.getLogger(BitalinoDemo.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                //close bluetooth connection
-                if (bitalino != null) {
-                    bitalino.close();
-                }
-            } catch (BITalinoException ex) {
-                Logger.getLogger(BitalinoDemo.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
+            return data;
     }
-
+    
 }
