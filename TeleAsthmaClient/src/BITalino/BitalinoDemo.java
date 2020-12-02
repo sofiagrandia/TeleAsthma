@@ -84,13 +84,13 @@ public class BitalinoDemo {
                     data.addACC(frame[i].analog[1]);
                             
                 }
-                data.addSymptom(INSMONIA);
-                data.addActivity(EXERCISE);
-                data.addMedication(IBUPROPHEN);
+                
                 //data.setDate("July 21, 1983 01:15:00");
             }
             
-             
+                data.addSymptom(INSMONIA);
+                data.addActivity(EXERCISE);
+                data.addMedication(IBUPROPHEN);
             System.out.println("ECG: " + data.getECG()+ "\nACCELEROMETER: "+ data.getACC());
             
             //stop acquisition

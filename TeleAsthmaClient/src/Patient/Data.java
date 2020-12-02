@@ -28,6 +28,24 @@ private static final long serialVersionUID = 1L;
     private List<SYMPTOMS>symptoms = new ArrayList();
     private List<ACTIVITIES>activities = new ArrayList();
     private List<MEDICATION>medication = new ArrayList();
+    float FEM;
+    float FEV;
+
+    public float getFEM() {
+        return FEM;
+    }
+
+    public void setFEM(float FEM) {
+        this.FEM = FEM;
+    }
+
+    public float getFEV() {
+        return FEV;
+    }
+
+    public void setFEV(float FEV) {
+        this.FEV = FEV;
+    }
     //Date date;
     public Data(){
         this.ECG = ECG;
