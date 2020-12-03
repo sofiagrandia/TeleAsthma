@@ -83,28 +83,28 @@ public class TeleAsthmaClient implements Serializable {
         try {
             socket = new Socket("localhost", 9000);
             output = socket.getOutputStream();
-            input = socket.getInputStream();
+            //input = socket.getInputStream();
 
         } catch (IOException ex) {
             System.out.println("We cannot initialize connection");
+            System.exit(-1);
             Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             objectOutput = new ObjectOutputStream(output);
-            objectInput = new ObjectInputStream(input);
-
-        } catch (IOException ex) {
-            System.out.println("Problems creating the ObjectStream");
-            Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
+            //objectInput = new ObjectInputStream(input);
             objectOutput.writeObject(patient);
             objectOutput.flush();
+
         } catch (IOException ex) {
-            System.out.println("Problems sending object");
+            System.out.println("Unable to write the objects on the server");
             Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            releaseResources(objectOutput, socket);
+
         }
+       
         
     }
 }

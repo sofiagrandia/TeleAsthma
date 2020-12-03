@@ -16,7 +16,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javafx.scene.paint.Color.color;
+//import static javafx.scene.paint.Color.color;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
