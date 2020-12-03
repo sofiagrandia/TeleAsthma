@@ -9,11 +9,16 @@ import BITalino.BITalinoException;
 import BITalino.BitalinoDemo;
 import Patient.Data;
 import Patient.Patient;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,11 +27,17 @@ import java.util.logging.Logger;
  * @author Sofia
  */
 public class TeleAsthmaClient implements Serializable {
+
+    public static OutputStream output = null;
+    public static ObjectOutputStream objectOutput = null;
+    public static InputStream input = null;
+    public static ObjectInputStream objectInput = null;
+    static Socket socket = null;
+
     public static void main(String args[]) throws BITalinoException, Throwable {
         OutputStream outputStream = null;
         ObjectOutputStream objectOutputStream = null;
-        Socket socket = null;
-        
+
         //Patient[] patients = new Patient[3];
         //patients[0] = new Patient();
         Data data = BitalinoDemo.BITalinoMethod();
@@ -43,7 +54,7 @@ public class TeleAsthmaClient implements Serializable {
         try {
             objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(data);
-           
+
             objectOutputStream.flush();
         } catch (IOException ex) {
             System.out.println("Unable to write the objects on the server.");
@@ -52,6 +63,7 @@ public class TeleAsthmaClient implements Serializable {
             releaseResources(objectOutputStream, socket);
 
         }
+
     }
 
     private static void releaseResources(ObjectOutputStream objectOutputStream, Socket socket) {
@@ -65,5 +77,34 @@ public class TeleAsthmaClient implements Serializable {
         } catch (IOException ex) {
             Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static void socketClientPatient(Patient patient) throws IOException, FileNotFoundException, ClassNotFoundException {
+        try {
+            socket = new Socket("localhost", 9000);
+            output = socket.getOutputStream();
+            input = socket.getInputStream();
+
+        } catch (IOException ex) {
+            System.out.println("We cannot initialize connection");
+            Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            objectOutput = new ObjectOutputStream(output);
+            objectInput = new ObjectInputStream(input);
+
+        } catch (IOException ex) {
+            System.out.println("Problems creating the ObjectStream");
+            Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            objectOutput.writeObject(patient);
+            objectOutput.flush();
+        } catch (IOException ex) {
+            System.out.println("Problems sending object");
+            Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

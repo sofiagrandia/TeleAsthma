@@ -5,6 +5,14 @@
  */
 package Patient;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.io.Serializable;
 
 /**
@@ -12,49 +20,76 @@ import java.io.Serializable;
  * @author Sofia
  */
 public class Patient implements Serializable {
-      private static final long serialVersionUID = 1L;
-    
-    public enum GENDER{male, female, other}
+
+    private static final long serialVersionUID = 1L;
+
+    public enum GENDER {
+        male, female, other
+    }
     private final String id;
     private final String name;
     private final String surname;
-    private final int age;
+    private final Fecha dob;
     private final float weight;
     private final float height;
     private final String asthmaType;
     private final String doctor;
-    private final Login login;
-    
+
     private GENDER gender;
 
-    public Patient(String id, String name, String surname, int age, float weight, float height, String asthmaType, String doctor, Login login, GENDER gender) {
+    public Patient(String id, String name, String surname, Fecha dob, float weight, float height, String asthmaType, String doctor, GENDER gender) {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.age = age;
+        this.dob = dob;
         this.weight = weight;
         this.height = height;
         this.asthmaType = asthmaType;
         this.doctor = doctor;
-        this.login = login;
+
         this.gender = gender;
     }
-public Patient() {
-        this.id = "001";
+
+    public Patient(String id, String name, String surname, Fecha dob, float weight, float height, String asthmaType, String doctor) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.dob = dob;
+        this.weight = weight;
+        this.height = height;
+        this.asthmaType = asthmaType;
+        this.doctor = doctor;
+
+        this.gender = null;
+    }
+
+    public Patient(String id) {
+        this.id = id;
         this.name = "Juana";
         this.surname = "La loca";
-        this.age = 16;
+        this.dob = Fecha.setFechaComp(14, 12, 2000);
         this.weight = 40;
         this.height = 164;
         this.asthmaType = "Severe";
         this.doctor = "McDreamy";
-        this.login = null;
+        this.gender = gender.other;
+    }
+
+    public Patient() {
+        this.id = "001";
+        this.name = "Juana";
+        this.surname = "La loca";
+        this.dob = Fecha.setFechaComp(14, 12, 2000);
+        this.weight = 40;
+        this.height = 164;
+        this.asthmaType = "Severe";
+        this.doctor = "McDreamy";
         this.gender = gender.other;
     }
 
     @Override
     public String toString() {
-        return "Patient to String{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", age=" + age + ", weight=" + weight + ", height=" + height + ", asthmaType=" + asthmaType + ", doctor=" + doctor + ", login=" + login + ", gender=" + gender + '}';
+        return "Patient to String{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", weight=" + weight + ", height=" + height + ", asthmaType=" + asthmaType + ", doctor=" + doctor + ", gender=" + gender + '}';
     }
 
     public static long getSerialVersionUID() {
@@ -73,8 +108,8 @@ public Patient() {
         return surname;
     }
 
-    public int getAge() {
-        return age;
+    public Fecha getDob() {
+        return dob;
     }
 
     public float getWeight() {
@@ -93,13 +128,24 @@ public Patient() {
         return doctor;
     }
 
-    public Login getLogin() {
-        return login;
-    }
-
     public GENDER getGender() {
         return gender;
     }
 
-   
+    public static Patient createPatient(String id, String name, String surname, Fecha dob, float weight, float height, String asthmaType, String doctor, String gender) throws FileNotFoundException, IOException {
+        GENDER g = GENDER.valueOf(gender);
+        Patient patient = new Patient(id, name, surname, dob, weight, height, asthmaType, doctor, g);
+           
+            return patient;
+        }
+
+
+    public static void readPatient(Patient patient) throws FileNotFoundException, IOException, ClassNotFoundException {
+        String id=patient.getId();
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("paciente"+id+"\\UserInfo.txt"));
+        Object aux = ois.readObject();
+        System.out.println(aux);
+
+    }
+
 }
