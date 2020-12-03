@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JTextField;
 import teleasthmaclient.TeleAsthmaClient;
 
@@ -37,7 +39,10 @@ public class Register extends javax.swing.JFrame {
         initComponents();
         Color backColor=new Color(143, 217, 223);
         Color titleColor=new Color(13, 124, 144 );
+        Color buttonColor=new Color(7, 100, 117 );
         this.getContentPane().setBackground(white);
+         javax.swing.border.Border line = BorderFactory.createLineBorder(backColor, 3);
+        ((JComponent)getContentPane()).setBorder(line);
         Font font=new Font("Helvetica", Font.BOLD, 15);
         Font font2=new Font("HelveticaBold", Font.ITALIC, 30);
         this.jLabel1.setFont(font);
@@ -50,7 +55,9 @@ public class Register extends javax.swing.JFrame {
         this.jLabel8.setFont(font);
         this.jLabel9.setFont(font);
         this.jLabel10.setFont(font2);
+        this.jLabel11.setFont(font);
         this.jLabel12.setFont(font);
+        this.jLabel13.setFont(font);
         this.jLabel1.setForeground(backColor);
         this.jLabel2.setForeground(backColor);
         this.jLabel3.setForeground(backColor);
@@ -61,7 +68,16 @@ public class Register extends javax.swing.JFrame {
         this.jLabel8.setForeground(backColor);
         this.jLabel9.setForeground(backColor);
         this.jLabel10.setForeground(titleColor);
+        this.jLabel11.setForeground(titleColor);
         this.jLabel12.setForeground(backColor);
+        this.jLabel13.setForeground(titleColor);
+        jButton1.setBackground(buttonColor);
+        jButton1.setForeground(Color.white);
+        jButton1.setFont(font);
+        combo.setBackground(buttonColor);
+        combo.setForeground(Color.white);
+        combo.setFont(font);
+        
     }
 
     /**
@@ -99,6 +115,8 @@ public class Register extends javax.swing.JFrame {
         dobMonth = new javax.swing.JTextField();
         dobYear = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         genderText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,6 +193,10 @@ public class Register extends javax.swing.JFrame {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pruebaJFrame/icon.png"))); // NOI18N
         jLabel10.setText("Create Profile");
 
+        jLabel11.setText("/");
+
+        jLabel13.setText("/");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,14 +214,18 @@ public class Register extends javax.swing.JFrame {
                             .addComponent(combo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(dobDay, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(dobMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dobYear, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(92, 92, 92)
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dobYear, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
@@ -273,7 +299,9 @@ public class Register extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(dobDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dobMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dobYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(dobYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel13)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -392,7 +420,9 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

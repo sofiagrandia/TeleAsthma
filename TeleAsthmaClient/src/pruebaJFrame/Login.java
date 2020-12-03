@@ -16,9 +16,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.layout.Border;
 //import static javafx.scene.paint.Color.color;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -37,13 +40,25 @@ public class Login extends javax.swing.JFrame {
     public Login() throws MalformedURLException, IOException {
         initComponents();
         Color backColor=new Color(143, 217, 223);
+        Color buttonColor=new Color(7, 100, 117 );
+        javax.swing.border.Border line = BorderFactory.createLineBorder(backColor, 3);
+        ((JComponent)getContentPane()).setBorder(line);
         this.getContentPane().setBackground(white);
         Font font=new Font("Helvetica", Font.LAYOUT_LEFT_TO_RIGHT, 20);
+        Font font2=new Font("Helvetica", Font.BOLD, 15);
+        Font font3=new Font("HelveticaBold", Font.ITALIC, 30);
         this.jLabel1.setFont(font);
         this.jLabel2.setFont(font);
+        this.jLabel4.setFont(font3);
         this.jLabel1.setForeground(backColor);
         this.jLabel2.setForeground(backColor);
-    
+        this.jLabel4.setForeground(buttonColor);
+        jButton1.setBackground(buttonColor);
+        jButton1.setForeground(Color.white);
+        jButton1.setFont(font2);
+        buttonLogin.setBackground(buttonColor);
+        buttonLogin.setForeground(Color.white);
+        buttonLogin.setFont(font2);
       
     }
 
@@ -66,6 +81,7 @@ public class Login extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -112,6 +128,8 @@ public class Login extends javax.swing.JFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pruebaJFrame/logoFinal.png"))); // NOI18N
 
+        jLabel4.setText("--Welcome--");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,10 +140,11 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
-                    .addComponent(buttonLogin))
-                .addGap(185, 185, 185))
+                    .addComponent(buttonLogin)
+                    .addComponent(jLabel4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
@@ -138,11 +157,13 @@ public class Login extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel4)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(textPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -239,6 +260,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPasswordField textPassword;
