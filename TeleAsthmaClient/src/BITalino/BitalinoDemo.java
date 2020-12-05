@@ -4,19 +4,11 @@ import Patient.Data;
 import static Patient.Data.ACTIVITIES.EXERCISE;
 import static Patient.Data.MEDICATION.IBUPROPHEN;
 import static Patient.Data.SYMPTOMS.INSMONIA;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Vector;
 
 import javax.bluetooth.RemoteDevice;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class BitalinoDemo {
 
