@@ -5,8 +5,10 @@
  */
 package FXML;
 
+import java.awt.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -19,6 +21,8 @@ public class FXMLController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    @FXML private Label userLogin;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

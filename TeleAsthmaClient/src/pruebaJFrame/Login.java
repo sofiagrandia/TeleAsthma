@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.layout.Border;
-//import static javafx.scene.paint.Color.color;
+import static javafx.scene.paint.Color.color;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -267,3 +267,4 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField textUser;
     // End of variables declaration//GEN-END:variables
 }
+
