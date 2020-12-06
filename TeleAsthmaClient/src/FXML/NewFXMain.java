@@ -24,7 +24,9 @@ public class NewFXMain extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("FXML.fxml"));
+        //FXMLLoader loader = new FXMLLoader(FXML.NewFXMain.class.getResource("FXML.fxml"));
+        //Parent root =  loader.load();
+       Parent root = FXMLLoader.load(getClass().getResource("FXML.fxml"));
         Scene scene = new Scene(root);
         
         primaryStage.setScene(scene);
