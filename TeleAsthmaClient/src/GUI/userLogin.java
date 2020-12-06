@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXML;
+package GUI;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -17,20 +17,19 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
- *      
- * @author anaco
+ *
+ * @author amandaperez-porro
  */
-public class NewFXMain extends Application {
+public class userLogin extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("principal.fxml"));
+         Parent root = FXMLLoader.load(getClass().getResource("userLogin.fxml"));
         
         Scene scene = new Scene(root);
         
         primaryStage.setScene(scene);
         primaryStage.show();
-        
     }
 
     /**

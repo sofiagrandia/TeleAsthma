@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -25,6 +26,9 @@ public class NewFXMain extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("prueba.fxml"));
+        //FXMLLoader loader = new FXMLLoader(newpackage.NewFXMain.class.getResource("prueba.fxml"));
+        //Parent root =  loader.load();
+        //Pane root = FXMLLoader.load(getClass().getResource("/prueba.fxml"));
         Scene scene = new Scene(root);
         
         primaryStage.setScene(scene);
