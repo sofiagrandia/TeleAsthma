@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 public class RegisterViewController implements Initializable {
 
     
-
+     
     /**
      * Initializes the controller class.
      */

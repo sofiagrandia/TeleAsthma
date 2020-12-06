@@ -17,7 +17,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
- *
+ *      
  * @author anaco
  */
 public class NewFXMain extends Application {
