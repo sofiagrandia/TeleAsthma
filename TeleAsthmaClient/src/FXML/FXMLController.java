@@ -35,7 +35,7 @@ public class FXMLController implements Initializable {
     
     
     //cuando llamas a este metodo, se abre la ventana de Registro
-   
+    @FXML
     public void changeToRegisterwhenButtonPushed(ActionEvent event) throws IOException{
         Parent registerParent=FXMLLoader.load(getClass().getResource("FXML/RegisterView.fxml"));
         Scene registerScene = new Scene(registerParent);
