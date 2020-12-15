@@ -13,7 +13,15 @@ import javax.bluetooth.RemoteDevice;
 public class BitalinoDemo {
 
     public static Frame[] frame;
+static public Boolean loading=true;
 
+    public static Boolean getLoading() {
+        return loading;
+    }
+
+    public static void setLoading(Boolean loading) {
+        BitalinoDemo.loading = loading;
+    }
    /* public static void main(String[] args) {
         //ArrayList<Integer> ECG = new ArrayList();
        
@@ -41,6 +49,7 @@ public class BitalinoDemo {
           BITalino bitalino = new BITalino();
           ArrayList<Integer> time = new ArrayList();
           Data data = new Data();
+          
         
             // Code to find Devices
             //Only works on some OS
@@ -54,12 +63,12 @@ public class BitalinoDemo {
             //Sampling rate, should be 10, 100 or 1000
             int SamplingRate = 100;
             bitalino.open(macAddress, SamplingRate);
-
+            
             // Start acquisition on analog channels A2 and A6
             // For example, If you want A1, A3 and A4 you should use {0,2,3}
             int[] channelsToAcquire = {1, 5};
             bitalino.start(channelsToAcquire);
-
+           
             //Read in total 10000000 times
             for (int j = 0; j < 30; j++) {
 
@@ -87,6 +96,7 @@ public class BitalinoDemo {
             
             //stop acquisition
             bitalino.stop();
+            BitalinoDemo.setLoading(false);
             return data;
     }
     
