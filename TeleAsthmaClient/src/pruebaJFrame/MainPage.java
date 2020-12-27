@@ -5,12 +5,19 @@
  */
 package pruebaJFrame;
 
+import Patient.Data;
+import Patient.SharedInfo;
 import java.awt.Color;
 import static java.awt.Color.white;
 import java.awt.Font;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import teleasthmaclient.TeleAsthmaClient;
 
 /**
  *
@@ -101,8 +108,18 @@ public class MainPage extends javax.swing.JFrame {
         });
 
         jButton5.setText("Profile");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("SEND DATA");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,6 +186,23 @@ public class MainPage extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         closeWindow();
     }//GEN-LAST:event_formWindowClosing
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            Socket socket = new Socket("localhost", 9000);
+            SharedInfo.getInstance().setSocket(socket);
+            Data data = SharedInfo.getInstance().getData();
+            System.out.println(SharedInfo.getInstance().getData());
+            TeleAsthmaClient.socketClient(data);
+        } catch (IOException ex) {
+            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        Profile prof = new Profile();
+        prof.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -21,12 +21,22 @@ public class SharedInfo {
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
     private static SharedInfo si;
+    private UserLogin ul;
 
     private SharedInfo() {
         data = new Data();
         patient = new Patient();
         socket = new Socket();
+        ul = new UserLogin();
         }
+
+    public UserLogin getUl() {
+        return ul;
+    }
+
+    public void setUl(UserLogin ul) {
+        this.ul = ul;
+    }
 
     public ObjectOutputStream getOos() {
         return oos;

@@ -4,6 +4,7 @@ import Patient.Data;
 import static Patient.Data.ACTIVITIES.EXERCISE;
 import static Patient.Data.MEDICATION.IBUPROPHEN;
 import static Patient.Data.SYMPTOMS.INSOMNIA;
+import Patient.SharedInfo;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -48,7 +49,7 @@ static public Boolean loading=true;
     public static Data BITalinoMethod() throws InterruptedException, BITalinoException, Throwable {
           BITalino bitalino = new BITalino();
           ArrayList<Integer> time = new ArrayList();
-          Data data = new Data();
+          Data data = SharedInfo.getInstance().getData();
           
         
             // Code to find Devices
@@ -89,10 +90,7 @@ static public Boolean loading=true;
                 //data.setDate("July 21, 1983 01:15:00");
             }
             
-                data.addSymptom(INSOMNIA);
-                data.addActivity(EXERCISE);
-                data.addMedication(IBUPROPHEN);
-            System.out.println("ECG: " + data.getECG()+ "\nACCELEROMETER: "+ data.getACC());
+            
             
             //stop acquisition
             bitalino.stop();

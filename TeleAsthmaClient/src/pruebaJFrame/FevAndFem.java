@@ -158,6 +158,7 @@ public class FevAndFem extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
         Data d = SharedInfo.getInstance().getData();
         String fem=jTextField1.getText();
         float femF=Float.parseFloat(fem);
@@ -166,6 +167,7 @@ public class FevAndFem extends javax.swing.JFrame {
         d.setFEM(femF);
         d.setFEV(fevF);
         SharedInfo.getInstance().setData(d);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

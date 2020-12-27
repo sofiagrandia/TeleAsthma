@@ -141,11 +141,12 @@ private static final long serialVersionUID = 1L;
     public void setDate(Date date) {
         this.date = date;
     }*/
-     @Override
+
+    @Override
     public String toString() {
-        return "Data{ " + "symptoms=" + symptoms + ", activities=" + activities + ", medication=" 
-                + medication + ", ECG" + ECG+ ", ACC" +ACC+ " }";
+        return "Data{" + "ECG=" + ECG + ", time=" + time + ", ACC=" + ACC + ", symptoms=" + symptoms + ", activities=" + activities + ", medication=" + medication + ", FEM=" + FEM + ", FEV=" + FEV + '}';
     }
+  
     
     
 }

@@ -69,7 +69,7 @@ public class Fecha implements Serializable{
     
     @Override
     public String toString() {
-        return "Date: " + "day=" + day + ", month=" + month + ", year=" + year +  '\n';
+        return  day + "/" + month + "/" + year ;
     }
     
     

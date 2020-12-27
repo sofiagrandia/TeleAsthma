@@ -27,6 +27,9 @@ public class Patient implements Serializable {
         male, female, other
     }
     private final String id;
+    private final String password;
+
+   
     private final String name;
     private final String surname;
     private final Fecha dob;
@@ -37,8 +40,9 @@ public class Patient implements Serializable {
 
     private GENDER gender;
 
-    public Patient(String id, String name, String surname, Fecha dob, float weight, float height, String asthmaType, String doctor, GENDER gender) {
+    public Patient(String id,String password, String name, String surname, Fecha dob, float weight, float height, String asthmaType, String doctor, GENDER gender) {
         this.id = id;
+        this.password=password;
         this.name = name;
         this.surname = surname;
         this.dob = dob;
@@ -50,8 +54,9 @@ public class Patient implements Serializable {
         this.gender = gender;
     }
 
-    public Patient(String id, String name, String surname, Fecha dob, float weight, float height, String asthmaType, String doctor) {
+    public Patient(String id, String password,String name, String surname, Fecha dob, float weight, float height, String asthmaType, String doctor) {
         this.id = id;
+        this.password=password;
         this.name = name;
         this.surname = surname;
         this.dob = dob;
@@ -65,6 +70,7 @@ public class Patient implements Serializable {
 
     public Patient(String id) {
         this.id = id;
+        this.password="1";
         this.name = "Juana";
         this.surname = "La loca";
         this.dob = Fecha.setFechaComp(14, 12, 2000);
@@ -77,6 +83,7 @@ public class Patient implements Serializable {
 
     public Patient() {
         this.id = "001";
+        this.password="1";
         this.name = "Juana";
         this.surname = "La loca";
         this.dob = Fecha.setFechaComp(14, 12, 2000);
@@ -91,7 +98,15 @@ public class Patient implements Serializable {
     public String toString() {
         return "Patient to String{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", weight=" + weight + ", height=" + height + ", asthmaType=" + asthmaType + ", doctor=" + doctor + ", gender=" + gender + '}';
     }
-
+    public String toStringEnter() {
+        String s= "User Information\n " + "\nID: " + id + "\nName: " + name + "\nSurname: " + surname + ",\nDate of Birth: " + dob + ",\nWeight: " + weight + "\nHeight: " + height + "\nAsthma Type: " + asthmaType + "\nDoctor: " + doctor + "\nGender:" + gender ;
+        return s;
+    }
+    public String getPassword() {
+        return password;
+    }
+    
+ 
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -132,9 +147,9 @@ public class Patient implements Serializable {
         return gender;
     }
 
-    public static Patient createPatient(String id, String name, String surname, Fecha dob, float weight, float height, String asthmaType, String doctor, String gender) throws FileNotFoundException, IOException {
+    public static Patient createPatient(String id, String password, String name, String surname, Fecha dob, float weight, float height, String asthmaType, String doctor, String gender) throws FileNotFoundException, IOException {
         GENDER g = GENDER.valueOf(gender);
-        Patient patient = new Patient(id, name, surname, dob, weight, height, asthmaType, doctor, g);
+        Patient patient = new Patient(id, password, name, surname, dob, weight, height, asthmaType, doctor, g);
            
             return patient;
         }

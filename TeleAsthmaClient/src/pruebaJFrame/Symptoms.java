@@ -116,7 +116,8 @@ public class Symptoms extends javax.swing.JFrame {
         jToggleButton18.setForeground(Color.white);
         jToggleButton18.setFont(font);
     }
-    Data data = new Data();
+   // Data data = new Data();
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -539,8 +540,7 @@ public class Symptoms extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);
-        MainPage main = new MainPage();
-        main.setVisible(true);
+      
                             
     }//GEN-LAST:event_jButton2ActionPerformed
 

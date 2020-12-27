@@ -183,6 +183,12 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
+        passwordText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordTextActionPerformed(evt);
+            }
+        });
+
         jLabel12.setText("Gender");
 
         combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "choose an option","male", "female", "other" }));
@@ -365,19 +371,20 @@ public class Register extends javax.swing.JFrame {
         Fecha f = new Fecha(dobDay.getText(), dobMonth.getText(), dobYear.getText());
 
         try {
-            Patient p = Patient.createPatient(DNItext.getText(), nameText.getText(), surnameText.getText(), f, Float.parseFloat(weightText.getText()), Float.parseFloat(heightText.getText()), asthmaText.getText(), doctorText.getText(), genderText.getText());
+            Patient p = Patient.createPatient(DNItext.getText(), passwordText.getText(), nameText.getText(), surnameText.getText(), f, Float.parseFloat(weightText.getText()), Float.parseFloat(heightText.getText()), asthmaText.getText(), doctorText.getText(), genderText.getText());
+            
             //readPatient(p);
             SharedInfo.getInstance().setPatient(p);
-            Data data = SharedInfo.getInstance().getData();
-            data.setId(p.getId());
-            SharedInfo.getInstance().setData(data);
+            //Data data = SharedInfo.getInstance().getData();
+            //data.setId(p.getId());
+            //SharedInfo.getInstance().setData(data);
             Socket socket = new Socket("localhost", 9000);
             SharedInfo.getInstance().setSocket(socket);
             SharedInfo.getInstance().setOos(new ObjectOutputStream(socket.getOutputStream()));
             SharedInfo.getInstance().setOis(new ObjectInputStream(socket.getInputStream()));
 
             TeleAsthmaClient.socketClient(p);
-            TeleAsthmaClient.socketClient(data);
+            //TeleAsthmaClient.socketClient(data);
 
             System.out.println(SharedInfo.getInstance().getData().getId());
             MainPage main = new MainPage();
@@ -416,6 +423,10 @@ public class Register extends javax.swing.JFrame {
             Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void passwordTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordTextActionPerformed
 
     /**
      * @param args the command line arguments
