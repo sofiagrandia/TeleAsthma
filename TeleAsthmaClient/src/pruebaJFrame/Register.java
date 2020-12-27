@@ -5,11 +5,13 @@
  */
 package pruebaJFrame;
 
+import Patient.Data;
 import Patient.Fecha;
 import Patient.Patient;
 import Patient.Patient.GENDER;
 import static Patient.Patient.createPatient;
 import static Patient.Patient.readPatient;
+import Patient.SharedInfo;
 import java.awt.Color;
 import static java.awt.Color.white;
 import java.awt.Font;
@@ -17,6 +19,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -37,14 +41,14 @@ public class Register extends javax.swing.JFrame {
      */
     public Register() {
         initComponents();
-        Color backColor=new Color(143, 217, 223);
-        Color titleColor=new Color(13, 124, 144 );
-        Color buttonColor=new Color(7, 100, 117 );
+        Color backColor = new Color(143, 217, 223);
+        Color titleColor = new Color(13, 124, 144);
+        Color buttonColor = new Color(7, 100, 117);
         this.getContentPane().setBackground(white);
-         javax.swing.border.Border line = BorderFactory.createLineBorder(backColor, 3);
-        ((JComponent)getContentPane()).setBorder(line);
-        Font font=new Font("Helvetica", Font.BOLD, 15);
-        Font font2=new Font("HelveticaBold", Font.ITALIC, 30);
+        javax.swing.border.Border line = BorderFactory.createLineBorder(backColor, 3);
+        ((JComponent) getContentPane()).setBorder(line);
+        Font font = new Font("Helvetica", Font.BOLD, 15);
+        Font font2 = new Font("HelveticaBold", Font.ITALIC, 30);
         this.jLabel1.setFont(font);
         this.jLabel2.setFont(font);
         this.jLabel3.setFont(font);
@@ -74,10 +78,13 @@ public class Register extends javax.swing.JFrame {
         jButton1.setBackground(buttonColor);
         jButton1.setForeground(Color.white);
         jButton1.setFont(font);
+        jButton2.setBackground(Color.lightGray);
+        jButton2.setForeground(titleColor);
+        jButton2.setFont(font);
         combo.setBackground(buttonColor);
         combo.setForeground(Color.white);
         combo.setFont(font);
-        
+
     }
 
     /**
@@ -117,6 +124,7 @@ public class Register extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         genderText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,6 +205,13 @@ public class Register extends javax.swing.JFrame {
 
         jLabel13.setText("/");
 
+        jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -225,12 +240,12 @@ public class Register extends javax.swing.JFrame {
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(dobYear, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(47, 47, 47)
+                        .addGap(80, 80, 80)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(doctorText)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(doctorText)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(surnameText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
@@ -256,14 +271,21 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(269, 269, 269))
             .addGroup(layout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(jLabel10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(178, 178, 178)
+                        .addComponent(jLabel10))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addContainerGap()
+                .addComponent(jButton2)
+                .addGap(3, 3, 3)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,15 +361,29 @@ public class Register extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //DNItext  = new JTextField();        // TODO add your handling code here:
+
         Fecha f = new Fecha(dobDay.getText(), dobMonth.getText(), dobYear.getText());
 
         try {
             Patient p = Patient.createPatient(DNItext.getText(), nameText.getText(), surnameText.getText(), f, Float.parseFloat(weightText.getText()), Float.parseFloat(heightText.getText()), asthmaText.getText(), doctorText.getText(), genderText.getText());
             //readPatient(p);
-            TeleAsthmaClient.socketClientPatient(p);
+            SharedInfo.getInstance().setPatient(p);
+            Data data = SharedInfo.getInstance().getData();
+            data.setId(p.getId());
+            SharedInfo.getInstance().setData(data);
+            Socket socket = new Socket("localhost", 9000);
+            SharedInfo.getInstance().setSocket(socket);
+            SharedInfo.getInstance().setOos(new ObjectOutputStream(socket.getOutputStream()));
+            SharedInfo.getInstance().setOis(new ObjectInputStream(socket.getInputStream()));
+
+            TeleAsthmaClient.socketClient(p);
+            TeleAsthmaClient.socketClient(data);
+
+            System.out.println(SharedInfo.getInstance().getData().getId());
+            MainPage main = new MainPage();
+            main.setVisible(true);
+            this.setVisible(false);
         } catch (IOException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
             Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -370,6 +406,16 @@ public class Register extends javax.swing.JFrame {
     private void genderTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_genderTextActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            this.setVisible(false);
+            Login log = new Login();
+            log.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -418,6 +464,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JTextField genderText;
     private javax.swing.JTextField heightText;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

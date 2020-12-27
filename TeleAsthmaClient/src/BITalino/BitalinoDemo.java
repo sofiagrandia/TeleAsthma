@@ -3,7 +3,7 @@ package BITalino;
 import Patient.Data;
 import static Patient.Data.ACTIVITIES.EXERCISE;
 import static Patient.Data.MEDICATION.IBUPROPHEN;
-import static Patient.Data.SYMPTOMS.INSMONIA;
+import static Patient.Data.SYMPTOMS.INSOMNIA;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -89,7 +89,7 @@ static public Boolean loading=true;
                 //data.setDate("July 21, 1983 01:15:00");
             }
             
-                data.addSymptom(INSMONIA);
+                data.addSymptom(INSOMNIA);
                 data.addActivity(EXERCISE);
                 data.addMedication(IBUPROPHEN);
             System.out.println("ECG: " + data.getECG()+ "\nACCELEROMETER: "+ data.getACC());

@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -19,8 +19,8 @@ import java.util.List;
 public class Data implements Serializable{
 private static final long serialVersionUID = 1L;
    
-    public enum SYMPTOMS{NO_SYMPTOMS,BREATHING_DIFFICULTY,BREATHING_WHISTLING,CHEST_PREASSURE,INSMONIA, HEADACHE, OTHERS};
-    public enum ACTIVITIES{EXERCISE,WITH_DOG,WITH_CAT,AT_HOME,SLEEPING,WORKING,OTHERS};
+    public enum SYMPTOMS{NO_SYMPTOMS,BREATHING_DIFFICULTY,BREATHING_WHISTLING,CHEST_PREASSURE,INSOMNIA, HEADACHE, OTHERS};
+    public enum ACTIVITIES{EXERCISE,WITH_ANIMAL,AT_HOME,SLEEPING,WORKING,OTHERS};
     public enum MEDICATION{NO_MEDICATION,RESCUE_INHALER,CONTROL_TREATMENT,ANTIHISTAMINES,IBUPROPHEN,PARACETAMOL,OTHERS};
     private ArrayList<Integer> ECG = new ArrayList();
     private ArrayList<Integer> time = new ArrayList();
@@ -30,6 +30,17 @@ private static final long serialVersionUID = 1L;
     private List<MEDICATION>medication = new ArrayList();
     float FEM;
     float FEV;
+    String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
+    
 
     public float getFEM() {
         return FEM;

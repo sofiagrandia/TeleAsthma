@@ -5,6 +5,13 @@
  */
 package pruebaJFrame;
 
+import java.awt.Color;
+import static java.awt.Color.white;
+import java.awt.Font;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Sofia
@@ -16,6 +23,32 @@ public class MainPage extends javax.swing.JFrame {
      */
     public MainPage() {
         initComponents();
+        Color backColor = new Color(52, 149, 206);
+        Color titleColor = new Color(13, 124, 144);
+        Color buttonColor = new Color(7, 100, 117);
+        this.getContentPane().setBackground(white);
+        javax.swing.border.Border line = BorderFactory.createLineBorder(backColor, 3);
+        ((JComponent) getContentPane()).setBorder(line);
+        Font font = new Font("Helvetica", Font.BOLD, 15);
+        Font font2 = new Font("HelveticaBold", Font.ITALIC, 30);
+        this.jLabel1.setFont(font2);
+        this.jLabel1.setForeground(titleColor);
+        jButton1.setBackground(buttonColor);
+        jButton1.setForeground(Color.white);
+        jButton1.setFont(font);
+        jButton2.setBackground(buttonColor);
+        jButton2.setForeground(Color.white);
+        jButton2.setFont(font);
+        jButton3.setBackground(Color.lightGray);
+        jButton3.setForeground(titleColor);
+        jButton3.setFont(font);
+        jButton4.setBackground(buttonColor);
+        jButton4.setForeground(Color.white);
+        jButton4.setFont(font);
+        jButton5.setBackground(backColor);
+        jButton5.setForeground(Color.WHITE);
+        jButton5.setFont(font);
+
     }
 
     /**
@@ -35,9 +68,16 @@ public class MainPage extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jButton3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(490, 317));
+        setPreferredSize(new java.awt.Dimension(600, 400));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
-        jLabel1.setText("MENU");
+        jLabel1.setText("Main Menu");
 
         jButton1.setText("Symptoms and Monitoring");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +94,11 @@ public class MainPage extends javax.swing.JFrame {
         });
 
         jButton4.setText("Introduce FEM / FEV data");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Profile");
 
@@ -63,8 +108,8 @@ public class MainPage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(90, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(156, 156, 156)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
                     .addComponent(jButton1)
@@ -73,12 +118,12 @@ public class MainPage extends javax.swing.JFrame {
                     .addComponent(jButton5)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
-                .addGap(118, 118, 118))
+                .addGap(152, 152, 152))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
@@ -92,7 +137,7 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(jButton4)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addGap(61, 61, 61))
         );
 
         pack();
@@ -107,6 +152,23 @@ public class MainPage extends javax.swing.JFrame {
         RecordECG ECGACC = new RecordECG();
         ECGACC.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        FevAndFem femfev = new FevAndFem();
+        femfev.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+    public void closeWindow() {
+        Object[] options = {"Exit", "Cancel"};
+        int eleccion = JOptionPane.showOptionDialog(rootPane, "Are you sure you want to exit the application?", "Mensaje de Confirmacion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, "Exit");
+        if (eleccion == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        closeWindow();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

@@ -9,6 +9,7 @@ import BITalino.BITalinoException;
 import BITalino.BitalinoDemo;
 import Patient.Data;
 import Patient.Patient;
+import Patient.SharedInfo;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -79,30 +80,17 @@ public class TeleAsthmaClient implements Serializable {
         }
     }
 
-    public static void socketClientPatient(Patient patient) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public static void socketClient(Object object) {
+       
         try {
-            socket = new Socket("localhost", 9000);
-            output = socket.getOutputStream();
-            //input = socket.getInputStream();
-
-        } catch (IOException ex) {
-            System.out.println("We cannot initialize connection");
-            System.exit(-1);
-            Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            objectOutput = new ObjectOutputStream(output);
+            objectOutput = SharedInfo.getInstance().getOos();
             //objectInput = new ObjectInputStream(input);
-            objectOutput.writeObject(patient);
+            objectOutput.writeObject(object);
             objectOutput.flush();
 
         } catch (IOException ex) {
             System.out.println("Unable to write the objects on the server");
             Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
-            releaseResources(objectOutput, socket);
-
         }
        
         

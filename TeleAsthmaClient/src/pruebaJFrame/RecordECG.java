@@ -9,23 +9,51 @@ import BITalino.BITalinoException;
 import BITalino.BitalinoDemo;
 import Patient.Data;
 import Patient.Patient;
+import Patient.SharedInfo;
+import java.awt.Color;
+import static java.awt.Color.white;
+import java.awt.Font;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 
 /**
  *
  * @author Sofia
  */
 public class RecordECG extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form RecordECG
      */
-    
     public RecordECG() {
         initComponents();
-        
+        Color backColor = new Color(143, 217, 223);
+        Color titleColor = new Color(13, 124, 144);
+        Color buttonColor = new Color(7, 100, 117);
+        this.getContentPane().setBackground(white);
+        javax.swing.border.Border line = BorderFactory.createLineBorder(backColor, 3);
+        ((JComponent) getContentPane()).setBorder(line);
+        Font font = new Font("Helvetica", Font.BOLD, 15);
+        Font font2 = new Font("HelveticaBold", Font.ITALIC, 20);
+        Font font3 = new Font("Helvetica", Font.PLAIN, 12);
+        this.jLabel1.setFont(font2);
+        this.jLabel1.setForeground(titleColor);
+        this.jLabel2.setFont(font3);
+        this.jLabel2.setForeground(backColor);
+        jButton1.setBackground(buttonColor);
+        jButton1.setForeground(Color.white);
+        jButton1.setFont(font);
+        jButton2.setBackground(buttonColor);
+        jButton2.setForeground(Color.white);
+        jButton2.setFont(font);
+        jButton3.setBackground(Color.lightGray);
+        jButton3.setForeground(titleColor);
+        jButton3.setFont(font);
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,8 +67,11 @@ public class RecordECG extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(370, 302));
 
         jLabel1.setText("Record ECG and Accelerometer");
 
@@ -52,9 +83,17 @@ public class RecordECG extends javax.swing.JFrame {
         });
 
         jButton2.setText("Record");
+        jButton2.setPreferredSize(new java.awt.Dimension(60, 23));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Back");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -63,53 +102,65 @@ public class RecordECG extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addContainerGap(125, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(126, 126, 126))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)))
+                .addContainerGap(120, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addContainerGap()
+                .addComponent(jButton3)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    //Loading load = new Loading();
-    //load.setVisible(true);   
+   
         try {
-            
-            Data data= BitalinoDemo.BITalinoMethod();
-            
+            Data data = BitalinoDemo.BITalinoMethod();
+            SharedInfo.getInstance().setData(data);
             String t = "Data captured!";
             jLabel2.setText(t);
-        } catch (BITalinoException ex) {
+        } catch (BITalinoException ex) {            
             Logger.getLogger(RecordECG.class.getName()).log(Level.SEVERE, null, ex);
-             
             jLabel2.setText("<html><center>Data was not captured! Please check your Bluetooth connection and try again</center></html>");
         } catch (Throwable ex) {
             Logger.getLogger(RecordECG.class.getName()).log(Level.SEVERE, null, ex);
         }
-   
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        ECGinstr instructions = new ECGinstr();
+        instructions.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.setVisible(false);
+        MainPage main = new MainPage();
+        main.setVisible(true);    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,8 +200,10 @@ public class RecordECG extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
     private String String(Data data) {
