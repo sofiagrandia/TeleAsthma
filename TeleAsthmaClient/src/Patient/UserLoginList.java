@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author Sofia
  */
 public class UserLoginList implements Serializable {
-    
+    private static final long serialVersionUID = 1L;
     private ArrayList<UserLogin> usersLogin = new ArrayList();
 
     public UserLoginList() {

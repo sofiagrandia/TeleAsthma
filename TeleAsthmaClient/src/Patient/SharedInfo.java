@@ -22,7 +22,9 @@ public class SharedInfo {
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
     private InputStream is;
+    
 
+    
     public InputStream getIs() {
         return is;
     }

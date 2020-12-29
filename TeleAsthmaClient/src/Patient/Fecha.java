@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 
 public class Fecha implements Serializable{
-
+private static final long serialVersionUID = 1L;
     
     private int day;
     private int month;

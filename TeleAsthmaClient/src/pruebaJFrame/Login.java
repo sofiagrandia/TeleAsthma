@@ -5,6 +5,9 @@
  */
 package pruebaJFrame;
 
+import Patient.Patient;
+import Patient.SharedInfo;
+import Patient.UserLogin;
 import java.awt.Color;
 import static java.awt.Color.white;
 import java.awt.Font;
@@ -12,7 +15,10 @@ import java.awt.PopupMenu;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +30,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import teleasthmaclient.TeleAsthmaClient;
 
 /**
  *
@@ -182,25 +189,30 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        // TODO add your handling code here:
-        char clave[] = textPassword.getPassword();
+        try {
+            // TODO add your handling code here:
+            String password = new String(textPassword.getPassword());
+            UserLogin ul = UserLogin.createUserLogin(textUser.getText(), password);
+            //readPatient(p);
+            SharedInfo.getInstance().setUl(ul);
+            System.out.println(ul);
+            //Data data = SharedInfo.getInstance().getData();
+            //data.setId(p.getId());
+            //SharedInfo.getInstance().setData(data);
+            Socket socket = new Socket("localhost", 9000);
+            SharedInfo.getInstance().setSocket(socket);
+            SharedInfo.getInstance().setOos(new ObjectOutputStream(socket.getOutputStream()));
+            SharedInfo.getInstance().setOis(new ObjectInputStream(socket.getInputStream()));
+            SharedInfo.getInstance().setIs(socket.getInputStream());
+            TeleAsthmaClient.socketClient(ul);
+            //TeleAsthmaClient.socketClient(data);
 
-        String clavedef = new String(clave);
-
-        if (textUser.getText().equals("Administrador") && clavedef.equals("12345")) {
-
-            this.dispose();
-
-            JOptionPane.showMessageDialog(null, "Bienvenido\n"
-                + "Has ingresado satisfactoriamente al sistema", "Mensaje de bienvenida",
-                JOptionPane.INFORMATION_MESSAGE);
-
-        } else {
-
-            JOptionPane.showMessageDialog(null, "Acceso denegado:\n"
-                + "Por favor ingrese un usuario y/o contraseña correctos", "Acceso denegado",
-                JOptionPane.ERROR_MESSAGE);
-
+            System.out.println(SharedInfo.getInstance().getData().getId());
+            this.setVisible(false);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonLoginActionPerformed
 
@@ -266,5 +278,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField textPassword;
     private javax.swing.JTextField textUser;
     // End of variables declaration//GEN-END:variables
+
+    
 }
 

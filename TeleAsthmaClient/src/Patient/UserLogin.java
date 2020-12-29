@@ -12,12 +12,18 @@ import java.io.Serializable;
  * @author Sofia
  */
 public class UserLogin implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String username;
     private String password;
 
     public UserLogin(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+    
+    public static UserLogin createUserLogin(String username, String password) {
+        UserLogin ul = new UserLogin(username, password);
+        return ul;
     }
 
     public UserLogin() {

@@ -25,7 +25,7 @@ public class Profile extends javax.swing.JFrame {
      */
     public Profile() {
         initComponents();
-         Color backColor = new Color(143, 217, 223);
+        Color backColor = new Color(143, 217, 223);
         Color titleColor = new Color(13, 124, 144);
         Color buttonColor = new Color(7, 100, 117);
         this.getContentPane().setBackground(white);

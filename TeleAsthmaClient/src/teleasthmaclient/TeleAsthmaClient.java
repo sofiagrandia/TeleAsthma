@@ -10,6 +10,7 @@ import BITalino.BitalinoDemo;
 import Patient.Data;
 import Patient.Patient;
 import Patient.SharedInfo;
+import Patient.UserLogin;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,7 +30,7 @@ import pruebaJFrame.Register;
  * @author Sofia
  */
 public class TeleAsthmaClient implements Serializable {
-
+private static final long serialVersionUID = 1L;
     public static OutputStream output = null;
     public static ObjectOutputStream objectOutput = null;
     public static InputStream input = null;
@@ -81,29 +82,45 @@ public class TeleAsthmaClient implements Serializable {
         }
     }
 
-    public static void socketClient(Object object) {
-       
+    public static void socketClient(Object object) throws ClassNotFoundException {
+        Register reg = new Register();
         try {
             objectOutput = SharedInfo.getInstance().getOos();
             //objectInput = new ObjectInputStream(input);
             objectOutput.writeObject(object);
             objectOutput.flush();
             input = SharedInfo.getInstance().getIs();
-            int i=input.read();
+            
+            int i = input.read();
             System.out.println(i);
-            
-            
-            if(i==4){
+
+            if (i == 4) {
                 System.out.println("User already exists");
-                
-            }else{
+                reg.windowRegister(i);
+            } else if (i==5){
                 System.out.println("User registered");
+                reg.windowRegister(5);
+
+            }
+            
+            objectInput = SharedInfo.getInstance().getOis();
+            
+            Object obj = objectInput.readObject();
+            System.out.println(i);
+
+            if (obj instanceof Patient) {
+                System.out.println("Login correct");
+                SharedInfo.getInstance().setPatient((Patient) obj);
+                //reg.windowRegister(i);
+            } else if(obj instanceof UserLogin){
+                System.out.println("User does not exist");
+                //reg.windowRegister(5);
+            
             }
         } catch (IOException ex) {
             System.out.println("Unable to write the objects on the server");
             Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        
+
     }
 }

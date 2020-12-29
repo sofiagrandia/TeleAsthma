@@ -85,8 +85,6 @@ public class Register extends javax.swing.JFrame {
         combo.setBackground(buttonColor);
         combo.setForeground(Color.white);
         combo.setFont(font);
-        
-        
 
     }
 
@@ -355,24 +353,27 @@ public class Register extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public void windowRegister(int i){
-        if (i==4){
-        Object[] options = {"Exit", "OK"};
-        int eleccion = JOptionPane.showOptionDialog(rootPane, "User already exists, change ID", "Mensaje de Confirmacion",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null, options, "Exit");
-        if (eleccion == JOptionPane.YES_OPTION) {
-            System.exit(0);
-        }
-        }else{
+    public void windowRegister(int i) throws IOException {
+        if (i == 4) {
             Object[] options = {"OK"};
-        int eleccion = JOptionPane.showOptionDialog(rootPane, "User registered", "Mensaje de Confirmacion",
-                JOptionPane.OK_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null, options, "OK");
-        if (eleccion == JOptionPane.OK_OPTION) {
-            MainPage main = new MainPage();
-            main.setVisible(true);
-        }
+            int eleccion = JOptionPane.showOptionDialog(rootPane, "User already exists, change ID", "Mensaje de Confirmacion",
+                    JOptionPane.OK_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE, null, options, "Exit");
+
+            if (eleccion == JOptionPane.OK_OPTION) {
+                Login log = new Login();
+                log.setVisible(true);
+            }
+        } else {
+            Object[] options = {"OK"};
+            int eleccion = JOptionPane.showOptionDialog(rootPane, "User registered", "Mensaje de Confirmacion",
+                    JOptionPane.OK_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE, null, options, "OK");
+
+            if (eleccion == JOptionPane.OK_OPTION) {
+                MainPage main = new MainPage();
+                main.setVisible(true);
+            }
         }
     }
     private void heightTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heightTextActionPerformed
@@ -394,7 +395,7 @@ public class Register extends javax.swing.JFrame {
 
         try {
             Patient p = Patient.createPatient(DNItext.getText(), passwordText.getText(), nameText.getText(), surnameText.getText(), f, Float.parseFloat(weightText.getText()), Float.parseFloat(heightText.getText()), asthmaText.getText(), doctorText.getText(), genderText.getText());
-            
+
             //readPatient(p);
             SharedInfo.getInstance().setPatient(p);
             //Data data = SharedInfo.getInstance().getData();
@@ -409,10 +410,10 @@ public class Register extends javax.swing.JFrame {
             //TeleAsthmaClient.socketClient(data);
 
             System.out.println(SharedInfo.getInstance().getData().getId());
-            MainPage main = new MainPage();
-            main.setVisible(true);
             this.setVisible(false);
         } catch (IOException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
         }
 
