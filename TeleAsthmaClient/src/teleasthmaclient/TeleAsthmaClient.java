@@ -22,6 +22,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pruebaJFrame.Register;
 
 /**
  *
@@ -87,7 +88,17 @@ public class TeleAsthmaClient implements Serializable {
             //objectInput = new ObjectInputStream(input);
             objectOutput.writeObject(object);
             objectOutput.flush();
-
+            input = SharedInfo.getInstance().getIs();
+            int i=input.read();
+            System.out.println(i);
+            
+            
+            if(i==4){
+                System.out.println("User already exists");
+                
+            }else{
+                System.out.println("User registered");
+            }
         } catch (IOException ex) {
             System.out.println("Unable to write the objects on the server");
             Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);

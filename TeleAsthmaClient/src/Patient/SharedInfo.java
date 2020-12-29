@@ -5,6 +5,7 @@
  */
 package Patient;
 
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -20,6 +21,15 @@ public class SharedInfo {
     private Socket socket;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
+    private InputStream is;
+
+    public InputStream getIs() {
+        return is;
+    }
+
+    public void setIs(InputStream is) {
+        this.is = is;
+    }
     private static SharedInfo si;
     private UserLogin ul;
 

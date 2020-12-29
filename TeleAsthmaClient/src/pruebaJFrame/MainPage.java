@@ -174,6 +174,7 @@ public class MainPage extends javax.swing.JFrame {
         FevAndFem femfev = new FevAndFem();
         femfev.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+    
     public void closeWindow() {
         Object[] options = {"Exit", "Cancel"};
         int eleccion = JOptionPane.showOptionDialog(rootPane, "Are you sure you want to exit the application?", "Mensaje de Confirmacion",

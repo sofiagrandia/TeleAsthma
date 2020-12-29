@@ -25,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import teleasthmaclient.TeleAsthmaClient;
 
@@ -84,6 +85,8 @@ public class Register extends javax.swing.JFrame {
         combo.setBackground(buttonColor);
         combo.setForeground(Color.white);
         combo.setFont(font);
+        
+        
 
     }
 
@@ -352,7 +355,26 @@ public class Register extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void windowRegister(int i){
+        if (i==4){
+        Object[] options = {"Exit", "OK"};
+        int eleccion = JOptionPane.showOptionDialog(rootPane, "User already exists, change ID", "Mensaje de Confirmacion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, "Exit");
+        if (eleccion == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+        }else{
+            Object[] options = {"OK"};
+        int eleccion = JOptionPane.showOptionDialog(rootPane, "User registered", "Mensaje de Confirmacion",
+                JOptionPane.OK_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, "OK");
+        if (eleccion == JOptionPane.OK_OPTION) {
+            MainPage main = new MainPage();
+            main.setVisible(true);
+        }
+        }
+    }
     private void heightTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heightTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_heightTextActionPerformed
@@ -382,7 +404,7 @@ public class Register extends javax.swing.JFrame {
             SharedInfo.getInstance().setSocket(socket);
             SharedInfo.getInstance().setOos(new ObjectOutputStream(socket.getOutputStream()));
             SharedInfo.getInstance().setOis(new ObjectInputStream(socket.getInputStream()));
-
+            SharedInfo.getInstance().setIs(socket.getInputStream());
             TeleAsthmaClient.socketClient(p);
             //TeleAsthmaClient.socketClient(data);
 
