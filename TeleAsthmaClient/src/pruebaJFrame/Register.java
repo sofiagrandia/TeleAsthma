@@ -126,6 +126,7 @@ public class Register extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
 
         genderText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,6 +203,12 @@ public class Register extends javax.swing.JFrame {
         dobDay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dobDayActionPerformed(evt);
+            }
+        });
+
+        dobYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dobYearActionPerformed(evt);
             }
         });
 
@@ -284,7 +291,10 @@ public class Register extends javax.swing.JFrame {
                         .addComponent(jLabel10))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -294,7 +304,9 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(3, 3, 3)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
@@ -355,26 +367,25 @@ public class Register extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     public void windowRegister(int i) throws IOException {
         if (i == 4) {
-            Object[] options = {"OK"};
-            int eleccion = JOptionPane.showOptionDialog(rootPane, "User already exists, change ID", "Mensaje de Confirmacion",
-                    JOptionPane.OK_OPTION,
-                    JOptionPane.INFORMATION_MESSAGE, null, options, "Exit");
-
-            if (eleccion == JOptionPane.OK_OPTION) {
-                Login log = new Login();
-                log.setVisible(true);
+            Object[] options = {"Exit", "Cancel"};
+            int eleccion = JOptionPane.showOptionDialog(rootPane, "User already exists, login or try again", "Mensaje de Confirmacion",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options, "Exit");
+            if (eleccion == JOptionPane.YES_OPTION) {
+                System.exit(0);
             }
-        } else {
+        } /*else if (i == 5) {
             Object[] options = {"OK"};
-            int eleccion = JOptionPane.showOptionDialog(rootPane, "User registered", "Mensaje de Confirmacion",
-                    JOptionPane.OK_OPTION,
-                    JOptionPane.INFORMATION_MESSAGE, null, options, "OK");
+            int eleccion2 = JOptionPane.showOptionDialog(rootPane, "User registered", "Mensaje de Confirmacion",
+                    JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "OK");
 
-            if (eleccion == JOptionPane.OK_OPTION) {
+            if (eleccion2 == JOptionPane.OK_OPTION) {
                 MainPage main = new MainPage();
+                main.pack();
                 main.setVisible(true);
+
             }
-        }
+        }*/
     }
     private void heightTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heightTextActionPerformed
         // TODO add your handling code here:
@@ -385,14 +396,113 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_nameTextActionPerformed
 
     private void DNItextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNItextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DNItextActionPerformed
 
+    }//GEN-LAST:event_DNItextActionPerformed
+    public static boolean isNumeric(String cadena) {
+
+        boolean resultado;
+
+        try {
+            Float.parseFloat(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+
+        return resultado;
+    }
+     public static boolean isInt(String cadena) {
+
+        boolean resultado;
+
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+
+        return resultado;
+    }
+      public static int comprobarDia(String mes) {
+
+        int resultado=0;
+
+        try {
+            
+            if(Integer.parseInt(mes)==2){
+            resultado = 28;    
+            }
+            if(Integer.parseInt(mes)==9||Integer.parseInt(mes)==11||Integer.parseInt(mes)==6||Integer.parseInt(mes)==4){
+            resultado = 30;    
+            }
+            if(Integer.parseInt(mes)==1||Integer.parseInt(mes)==3||Integer.parseInt(mes)==5||Integer.parseInt(mes)==7||Integer.parseInt(mes)==8||Integer.parseInt(mes)==10||Integer.parseInt(mes)==12){
+            resultado = 31;    
+            }
+            
+        } catch (NumberFormatException excepcion) {
+           // resultado = false;
+        }
+
+        return resultado;
+    }
+     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //DNItext  = new JTextField();        // TODO add your handling code here:
-
+        String id = "";
+        String pw = "";
+        String weight = "";
+        String height = "";
+        String doctor = "";
+        String asthmaT = "";
+        String day = "";
+        String month = "";
+        String year = "";
+        Boolean correct = true;
+        try{
+        if (DNItext.getText().length() >= 9) {
+            id = "Invalid ID | ";
+            correct=false;
+        }
+        if (passwordText.getText().length() < 10 && !passwordText.getText().contains("_")) {
+            pw = "Insecure password | ";
+            correct=false;
+        }
+        if (!isNumeric(weightText.getText())) {
+            weight = "Invalid weight | ";
+            correct=false;
+        }
+        if (isNumeric(doctorText.getText())) {
+            doctor = "Invalid Doctor | ";
+            correct=false;
+        }
+        if (!isNumeric(heightText.getText())) {
+            height = "Invalid Height | ";
+            correct=false;
+        }
+        if (isNumeric(asthmaText.getText())) {
+            asthmaT = "Invalid Asthma Type | ";
+            correct=false;
+        }
+        if (!isInt(dobDay.getText())||Integer.parseInt(dobDay.getText())>comprobarDia(dobMonth.getText())||Integer.parseInt(dobDay.getText())<=0) {
+            day = "Invalid Day | ";
+            correct=false;
+        }
+        if (!isInt(dobMonth.getText())||Integer.parseInt(dobMonth.getText())>12||Integer.parseInt(dobMonth.getText())<1) {
+            month = "Invalid Month | ";
+            correct=false;
+        }
+        if (!isInt(dobYear.getText())||Integer.parseInt(dobYear.getText())<1900) {
+            year = "Invalid Year | ";
+            correct=false;
+        }
+        jLabel14.setText(id + pw + weight+ height + asthmaT+ doctor+day+month+year);
+        }catch(NumberFormatException nex){
+             jLabel14.setText("Date is wrong");
+        }
         Fecha f = new Fecha(dobDay.getText(), dobMonth.getText(), dobYear.getText());
-
+        if(correct){
+           
         try {
             Patient p = Patient.createPatient(DNItext.getText(), passwordText.getText(), nameText.getText(), surnameText.getText(), f, Float.parseFloat(weightText.getText()), Float.parseFloat(heightText.getText()), asthmaText.getText(), doctorText.getText(), genderText.getText());
 
@@ -408,13 +518,15 @@ public class Register extends javax.swing.JFrame {
             SharedInfo.getInstance().setIs(socket.getInputStream());
             TeleAsthmaClient.socketClient(p);
             //TeleAsthmaClient.socketClient(data);
-
-            System.out.println(SharedInfo.getInstance().getData().getId());
-            this.setVisible(false);
+            //System.out.println(SharedInfo.getInstance().getData().getId());
+            this.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Register.class
+                    .getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Register.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -443,13 +555,18 @@ public class Register extends javax.swing.JFrame {
             Login log = new Login();
             log.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Register.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void passwordTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordTextActionPerformed
+
+    private void dobYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dobYearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dobYearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -468,20 +585,25 @@ public class Register extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Register.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Register.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Register.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Register.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Register().setVisible(true);
+                Register register = new Register();
+                register.setVisible(true);
 
             }
         });
@@ -504,6 +626,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

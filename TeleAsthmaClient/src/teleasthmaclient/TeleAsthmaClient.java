@@ -23,6 +23,8 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pruebaJFrame.Login;
+import pruebaJFrame.MainPage;
 import pruebaJFrame.Register;
 
 /**
@@ -30,7 +32,8 @@ import pruebaJFrame.Register;
  * @author Sofia
  */
 public class TeleAsthmaClient implements Serializable {
-private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
     public static OutputStream output = null;
     public static ObjectOutputStream objectOutput = null;
     public static InputStream input = null;
@@ -83,28 +86,27 @@ private static final long serialVersionUID = 1L;
     }
 
     public static void socketClient(Object object) throws ClassNotFoundException {
+
         Register reg = new Register();
         try {
             objectOutput = SharedInfo.getInstance().getOos();
             //objectInput = new ObjectInputStream(input);
             objectOutput.writeObject(object);
-            objectOutput.flush();
+            //objectOutput.flush();
             input = SharedInfo.getInstance().getIs();
-            
+
             int i = input.read();
             System.out.println(i);
+            reg.windowRegister(i);
 
             if (i == 4) {
                 System.out.println("User already exists");
-                reg.windowRegister(i);
-            } else if (i==5){
+            } else if (i == 5) {
                 System.out.println("User registered");
-                reg.windowRegister(5);
-
             }
-            
+
             objectInput = SharedInfo.getInstance().getOis();
-            
+
             Object obj = objectInput.readObject();
             System.out.println(i);
 
@@ -112,10 +114,10 @@ private static final long serialVersionUID = 1L;
                 System.out.println("Login correct");
                 SharedInfo.getInstance().setPatient((Patient) obj);
                 //reg.windowRegister(i);
-            } else if(obj instanceof UserLogin){
+            } else if (obj instanceof UserLogin) {
                 System.out.println("User does not exist");
                 //reg.windowRegister(5);
-            
+
             }
         } catch (IOException ex) {
             System.out.println("Unable to write the objects on the server");
@@ -123,4 +125,5 @@ private static final long serialVersionUID = 1L;
         }
 
     }
+
 }

@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import pruebaJFrame.Register;
 
 /**
  *
@@ -22,9 +23,7 @@ public class SharedInfo {
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
     private InputStream is;
-    
-
-    
+   
     public InputStream getIs() {
         return is;
     }
