@@ -374,18 +374,17 @@ public class Register extends javax.swing.JFrame {
             if (eleccion == JOptionPane.YES_OPTION) {
                 System.exit(0);
             }
-        } /*else if (i == 5) {
+        } else if (i == 5) {
             Object[] options = {"OK"};
             int eleccion2 = JOptionPane.showOptionDialog(rootPane, "User registered", "Mensaje de Confirmacion",
                     JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "OK");
 
             if (eleccion2 == JOptionPane.OK_OPTION) {
                 MainPage main = new MainPage();
-                main.pack();
                 main.setVisible(true);
 
             }
-        }*/
+        }
     }
     private void heightTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heightTextActionPerformed
         // TODO add your handling code here:
@@ -516,14 +515,13 @@ public class Register extends javax.swing.JFrame {
             SharedInfo.getInstance().setOos(new ObjectOutputStream(socket.getOutputStream()));
             SharedInfo.getInstance().setOis(new ObjectInputStream(socket.getInputStream()));
             SharedInfo.getInstance().setIs(socket.getInputStream());
+            this.setVisible(false);
+            
             TeleAsthmaClient.socketClient(p);
             //TeleAsthmaClient.socketClient(data);
             //System.out.println(SharedInfo.getInstance().getData().getId());
-            this.setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(Register.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+            
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(Register.class
                     .getName()).log(Level.SEVERE, null, ex);
         }

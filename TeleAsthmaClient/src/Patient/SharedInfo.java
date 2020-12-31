@@ -5,6 +5,7 @@
  */
 package Patient;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -49,7 +50,8 @@ public class SharedInfo {
         this.ul = ul;
     }
 
-    public ObjectOutputStream getOos() {
+    public ObjectOutputStream getOos() throws IOException {
+        
         return oos;
     }
 
@@ -57,7 +59,8 @@ public class SharedInfo {
         this.oos = oos;
     }
 
-    public ObjectInputStream getOis() {
+    public ObjectInputStream getOis() throws IOException {
+        
         return ois;
     }
 

@@ -39,6 +39,7 @@ public class TeleAsthmaClient implements Serializable {
     public static InputStream input = null;
     public static ObjectInputStream objectInput = null;
     static Socket socket = null;
+    
 
     public static void main(String args[]) throws BITalinoException, Throwable {
         OutputStream outputStream = null;
@@ -50,7 +51,10 @@ public class TeleAsthmaClient implements Serializable {
         System.out.println(data);
         try {
             socket = new Socket("localhost", 9000);
-            outputStream = socket.getOutputStream();
+            //añadido nuevo sofia
+            SharedInfo.getInstance().setSocket(socket);
+            outputStream = SharedInfo.getInstance().getSocket().getOutputStream();
+            //outputStream = socket.getOutputStream();
         } catch (IOException ex) {
             System.out.println("It was not possible to connect to the server.");
             System.exit(-1);
@@ -59,9 +63,12 @@ public class TeleAsthmaClient implements Serializable {
 
         try {
             objectOutputStream = new ObjectOutputStream(outputStream);
-            objectOutputStream.writeObject(data);
-
-            objectOutputStream.flush();
+            //nuevo
+            SharedInfo.getInstance().setOos(objectOutputStream);
+            
+            SharedInfo.getInstance().getOos().writeObject(data);
+            //objectOutputStream.writeObject(data);   
+            //objectOutputStream.flush();
         } catch (IOException ex) {
             System.out.println("Unable to write the objects on the server.");
             Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,24 +96,29 @@ public class TeleAsthmaClient implements Serializable {
 
         Register reg = new Register();
         try {
+            SharedInfo.getInstance().getOos().reset();
+            SharedInfo.getInstance().setOos(objectOutput);
+           
             objectOutput = SharedInfo.getInstance().getOos();
             //objectInput = new ObjectInputStream(input);
-            objectOutput.writeObject(object);
+            SharedInfo.getInstance().getOos().writeObject(object);
+            //objectOutput.writeObject(object);
             //objectOutput.flush();
             input = SharedInfo.getInstance().getIs();
 
             int i = input.read();
             System.out.println(i);
             reg.windowRegister(i);
-
+            
             if (i == 4) {
                 System.out.println("User already exists");
+                
             } else if (i == 5) {
                 System.out.println("User registered");
             }
-
+            SharedInfo.getInstance().setOis(new ObjectInputStream(socket.getInputStream()));
             objectInput = SharedInfo.getInstance().getOis();
-
+            
             Object obj = objectInput.readObject();
             System.out.println(i);
 

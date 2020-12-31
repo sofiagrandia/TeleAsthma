@@ -202,6 +202,7 @@ public class Login extends javax.swing.JFrame {
             Socket socket = new Socket("localhost", 9000);
             SharedInfo.getInstance().setSocket(socket);
             SharedInfo.getInstance().setOos(new ObjectOutputStream(socket.getOutputStream()));
+            
             SharedInfo.getInstance().setOis(new ObjectInputStream(socket.getInputStream()));
             SharedInfo.getInstance().setIs(socket.getInputStream());
             TeleAsthmaClient.socketClient(ul);
