@@ -18,6 +18,7 @@ import java.awt.Font;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -515,9 +516,13 @@ public class Register extends javax.swing.JFrame {
             SharedInfo.getInstance().setOos(new ObjectOutputStream(socket.getOutputStream()));
             SharedInfo.getInstance().setOis(new ObjectInputStream(socket.getInputStream()));
             SharedInfo.getInstance().setIs(socket.getInputStream());
+            //ObjectInputStream ois= SharedInfo.getInstance().getOis();
+            //ObjectOutputStream oos= SharedInfo.getInstance().getOos();
+            InputStream is= SharedInfo.getInstance().getIs();
             this.setVisible(false);
             
             TeleAsthmaClient.socketClient(p);
+            
             //TeleAsthmaClient.socketClient(data);
             //System.out.println(SharedInfo.getInstance().getData().getId());
             

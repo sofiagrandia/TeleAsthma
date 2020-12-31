@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 import pruebaJFrame.Login;
 import pruebaJFrame.MainPage;
 import pruebaJFrame.Register;
+import pruebaJFrame.windowAlert;
 
 /**
  *
@@ -39,10 +40,9 @@ public class TeleAsthmaClient implements Serializable {
     public static InputStream input = null;
     public static ObjectInputStream objectInput = null;
     static Socket socket = null;
-    
 
     public static void main(String args[]) throws BITalinoException, Throwable {
-        OutputStream outputStream = null;
+        /*OutputStream outputStream = null;
         ObjectOutputStream objectOutputStream = null;
 
         //Patient[] patients = new Patient[3];
@@ -51,10 +51,7 @@ public class TeleAsthmaClient implements Serializable {
         System.out.println(data);
         try {
             socket = new Socket("localhost", 9000);
-            //añadido nuevo sofia
-            SharedInfo.getInstance().setSocket(socket);
-            outputStream = SharedInfo.getInstance().getSocket().getOutputStream();
-            //outputStream = socket.getOutputStream();
+            outputStream = socket.getOutputStream();
         } catch (IOException ex) {
             System.out.println("It was not possible to connect to the server.");
             System.exit(-1);
@@ -63,23 +60,34 @@ public class TeleAsthmaClient implements Serializable {
 
         try {
             objectOutputStream = new ObjectOutputStream(outputStream);
-            //nuevo
-            SharedInfo.getInstance().setOos(objectOutputStream);
-            
-            SharedInfo.getInstance().getOos().writeObject(data);
-            //objectOutputStream.writeObject(data);   
-            //objectOutputStream.flush();
+            objectOutputStream.writeObject(data);   
+            objectOutputStream.flush();
         } catch (IOException ex) {
             System.out.println("Unable to write the objects on the server.");
             Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             releaseResources(objectOutputStream, socket);
 
-        }
+        }*/
 
     }
 
-    private static void releaseResources(ObjectOutputStream objectOutputStream, Socket socket) {
+    private static void releaseResources(ObjectInputStream objectInputStream,OutputStream outputStream,InputStream inputStream,ObjectOutputStream objectOutputStream, Socket socket) {
+        try {
+            outputStream.close();
+        } catch (IOException ex) {
+            Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            inputStream.close();
+        } catch (IOException ex) {
+            Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            objectInputStream.close();
+        } catch (IOException ex) {
+            Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             objectOutputStream.close();
         } catch (IOException ex) {
@@ -93,32 +101,42 @@ public class TeleAsthmaClient implements Serializable {
     }
 
     public static void socketClient(Object object) throws ClassNotFoundException {
-
-        Register reg = new Register();
         try {
-            SharedInfo.getInstance().getOos().reset();
+            //SharedInfo.getInstance().getOos().reset();
+            //socket = new Socket("localhost", 9000);
+            //socket= SharedInfo.getInstance().getSocket();
+            socket = new Socket("localhost", 9000);
+            SharedInfo.getInstance().setSocket(socket);
+            objectOutput = new ObjectOutputStream(socket.getOutputStream());
             SharedInfo.getInstance().setOos(objectOutput);
-           
             objectOutput = SharedInfo.getInstance().getOos();
             //objectInput = new ObjectInputStream(input);
-            SharedInfo.getInstance().getOos().writeObject(object);
-            //objectOutput.writeObject(object);
+            objectOutput.writeObject(object);
             //objectOutput.flush();
+
+            SharedInfo.getInstance().setIs(socket.getInputStream());
+            SharedInfo.getInstance().setOis(new ObjectInputStream(socket.getInputStream()));
             input = SharedInfo.getInstance().getIs();
 
             int i = input.read();
             System.out.println(i);
-            reg.windowRegister(i);
-            
+            //reg.windowRegister(i);
+            //wa.window(i);
+           
             if (i == 4) {
                 System.out.println("User already exists");
-                
+                Login log = new Login();
+                log.setVisible(true);
+
             } else if (i == 5) {
                 System.out.println("User registered");
+                MainPage main = new MainPage();
+                main.setVisible(true);
+                
             }
-            SharedInfo.getInstance().setOis(new ObjectInputStream(socket.getInputStream()));
+           
             objectInput = SharedInfo.getInstance().getOis();
-            
+
             Object obj = objectInput.readObject();
             System.out.println(i);
 
@@ -134,8 +152,10 @@ public class TeleAsthmaClient implements Serializable {
         } catch (IOException ex) {
             System.out.println("Unable to write the objects on the server");
             Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            releaseResources(objectInput, output,input,objectOutput, socket);
         }
-
+        
     }
 
 }

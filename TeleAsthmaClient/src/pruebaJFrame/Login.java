@@ -15,6 +15,7 @@ import java.awt.PopupMenu;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
@@ -38,9 +39,6 @@ import teleasthmaclient.TeleAsthmaClient;
  */
 public class Login extends javax.swing.JFrame {
     
-
-
-
     /**
      * Creates new form Login
      */
@@ -202,12 +200,13 @@ public class Login extends javax.swing.JFrame {
             Socket socket = new Socket("localhost", 9000);
             SharedInfo.getInstance().setSocket(socket);
             SharedInfo.getInstance().setOos(new ObjectOutputStream(socket.getOutputStream()));
-            
             SharedInfo.getInstance().setOis(new ObjectInputStream(socket.getInputStream()));
             SharedInfo.getInstance().setIs(socket.getInputStream());
+            //ObjectInputStream ois= SharedInfo.getInstance().getOis();
+            //ObjectOutputStream oos= SharedInfo.getInstance().getOos();
+            //InputStream is= SharedInfo.getInstance().getIs();
             TeleAsthmaClient.socketClient(ul);
             //TeleAsthmaClient.socketClient(data);
-
             System.out.println(SharedInfo.getInstance().getData().getId());
             this.setVisible(false);
         } catch (IOException ex) {
