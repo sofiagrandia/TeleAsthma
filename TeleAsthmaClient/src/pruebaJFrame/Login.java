@@ -23,8 +23,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.layout.Border;
-import static javafx.scene.paint.Color.color;
+
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;

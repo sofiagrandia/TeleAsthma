@@ -373,7 +373,8 @@ public class Register extends javax.swing.JFrame {
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE, null, options, "Exit");
             if (eleccion == JOptionPane.YES_OPTION) {
-                System.exit(0);
+                Login log=new Login();
+                log.setVisible(true);
             }
         } else if (i == 5) {
             Object[] options = {"OK"};
@@ -385,7 +386,25 @@ public class Register extends javax.swing.JFrame {
                 main.setVisible(true);
 
             }
-        }
+         } else if (i == 6) {
+            Object[] options = {"OK"};
+            int eleccion2 = JOptionPane.showOptionDialog(rootPane, "Login correct", "Mensaje de Confirmacion",
+                    JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "OK");
+
+            if (eleccion2 == JOptionPane.OK_OPTION) {
+                MainPage main = new MainPage();
+                main.setVisible(true);
+
+            }
+        } else if (i == 7) {
+            Object[] options = {"OK"};
+            int eleccion = JOptionPane.showOptionDialog(rootPane, "Login incorrect, try again", "Mensaje de Confirmacion",
+                    JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "OK");
+            if (eleccion == JOptionPane.OK_OPTION) {
+                Login log=new Login();
+                log.setVisible(true);
+            }
+        } 
     }
     private void heightTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heightTextActionPerformed
         // TODO add your handling code here:

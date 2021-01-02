@@ -67,6 +67,19 @@ public class Patient implements Serializable {
 
         this.gender = null;
     }
+    
+    public Patient(String id, String password) {
+        this.id = id;
+        this.password = password;
+        this.name = null;
+        this.surname = null;
+        this.dob = Fecha.setFechaComp(14, 12, 2000);
+        this.weight = 0;
+        this.height = 164;
+        this.asthmaType = "Severe";
+        this.doctor = "McDreamy";
+        this.gender = gender.other;
+    }
 
     public Patient(String id) {
         this.id = id;
@@ -93,6 +106,8 @@ public class Patient implements Serializable {
         this.doctor = "McDreamy";
         this.gender = gender.other;
     }
+
+   
 
     @Override
     public String toString() {
@@ -162,5 +177,11 @@ public class Patient implements Serializable {
         System.out.println(aux);
 
     }
+    public static Patient login(String id, String password) throws FileNotFoundException, IOException {
+        
+        Patient patient = new Patient(id, password);
+           
+            return patient;
+        }
 
 }
