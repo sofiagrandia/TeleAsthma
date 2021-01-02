@@ -159,7 +159,7 @@ public class TeleAsthmaClient extends JFrame implements Serializable {
             System.out.println("Unable to write the objects on the server");
             Logger.getLogger(TeleAsthmaClient.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
-            releaseResources(objectInput, output,input,objectOutput, socket);
+            //releaseResources(objectInput, output,input,objectOutput, socket);
         }
         
     }

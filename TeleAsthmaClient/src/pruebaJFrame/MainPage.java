@@ -195,6 +195,7 @@ public class MainPage extends javax.swing.JFrame {
             Data data = SharedInfo.getInstance().getData();
             System.out.println(SharedInfo.getInstance().getData());
             TeleAsthmaClient.socketClient(data);
+            this.setVisible(false);
         } catch (IOException ex) {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
