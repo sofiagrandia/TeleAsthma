@@ -25,12 +25,12 @@ public class ECGinstr extends javax.swing.JFrame {
         this.getContentPane().setBackground(white);
         Color backColor = new Color(143, 217, 223);
         Color titleColor = new Color(13, 124, 144);
-        Color buttonColor = new Color(52, 149, 206 );
+        Color buttonColor = new Color(52, 149, 206);
         javax.swing.border.Border line = BorderFactory.createLineBorder(backColor, 3);
         ((JComponent) getContentPane()).setBorder(line);
         Font font = new Font("Helvetica", Font.BOLD, 15);
-         Font font2 = new Font("HelveticaBold", Font.ITALIC, 20);
-         this.jLabel2.setFont(font2);
+        Font font2 = new Font("HelveticaBold", Font.ITALIC, 20);
+        this.jLabel2.setFont(font2);
         this.jLabel2.setForeground(titleColor);
         jButton1.setBackground(Color.lightGray);
         jButton1.setForeground(titleColor);
@@ -101,7 +101,7 @@ public class ECGinstr extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
-       
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -15,7 +15,7 @@ import javax.swing.JComponent;
 
 /**
  *
- * @author anaco
+ * @author Elena
  */
 public class FevAndFem extends javax.swing.JFrame {
 

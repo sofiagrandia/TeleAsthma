@@ -28,7 +28,7 @@ public class UserLogin implements Serializable {
 
     public UserLogin() {
         this.username="";
-        this.password=""; //To change body of generated methods, choose Tools | Templates.
+        this.password=""; 
     }
 
     public String getUsername() {

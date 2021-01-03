@@ -23,7 +23,6 @@ import static Patient.Data.SYMPTOMS.CHEST_PREASSURE;
 import static Patient.Data.SYMPTOMS.HEADACHE;
 import static Patient.Data.SYMPTOMS.INSOMNIA;
 import static Patient.Data.SYMPTOMS.NO_SYMPTOMS;
-import Patient.Patient;
 import Patient.SharedInfo;
 import java.awt.Color;
 import static java.awt.Color.white;
@@ -44,7 +43,7 @@ public class Symptoms extends javax.swing.JFrame {
         initComponents();
         Color backColor = new Color(143, 217, 223);
         Color titleColor = new Color(13, 124, 144);
-        Color buttonColor = new Color(52, 149, 206 );
+        Color buttonColor = new Color(52, 149, 206);
         this.getContentPane().setBackground(white);
         javax.swing.border.Border line = BorderFactory.createLineBorder(backColor, 3);
         ((JComponent) getContentPane()).setBorder(line);
@@ -116,8 +115,7 @@ public class Symptoms extends javax.swing.JFrame {
         jToggleButton18.setForeground(Color.white);
         jToggleButton18.setFont(font);
     }
-   // Data data = new Data();
-  
+    // Data data = new Data();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -540,8 +538,8 @@ public class Symptoms extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);
-      
-                            
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -573,6 +571,7 @@ public class Symptoms extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Symptoms().setVisible(true);
             }

@@ -43,7 +43,7 @@ public class Profile extends javax.swing.JFrame {
         this.jLabel8.setFont(font);
         this.jLabel9.setFont(font);
         this.jLabel10.setFont(font2);
-         this.jLabel1.setForeground(backColor);
+        this.jLabel1.setForeground(backColor);
         this.jLabel2.setForeground(backColor);
         this.jLabel3.setForeground(backColor);
         this.jLabel4.setForeground(backColor);
@@ -55,17 +55,16 @@ public class Profile extends javax.swing.JFrame {
         this.jLabel10.setForeground(titleColor);
         Patient p = SharedInfo.getInstance().getPatient();
         Fecha dob = p.getDob();
-                jLabel1.setText("Name: "+ p.getName());
-                jLabel2.setText("Surname: "+p.getSurname());
-                jLabel3.setText("ID: "+p.getId());
-                jLabel4.setText("Asthma Type: "+p.getAsthmaType());
-                jLabel5.setText("Gender: "+p.getGender().toString());
-                jLabel6.setText("Date of Birth: "+dob.toString());
-                jLabel7.setText("Doctor: "+p.getDoctor());
-                jLabel8.setText("Height: "+p.getHeight());
-                jLabel9.setText("Weight: "+p.getWeight());
-               
-                
+        jLabel1.setText("Name: " + p.getName());
+        jLabel2.setText("Surname: " + p.getSurname());
+        jLabel3.setText("ID: " + p.getId());
+        jLabel4.setText("Asthma Type: " + p.getAsthmaType());
+        jLabel5.setText("Gender: " + p.getGender().toString());
+        jLabel6.setText("Date of Birth: " + dob.toString());
+        jLabel7.setText("Doctor: " + p.getDoctor());
+        jLabel8.setText("Height: " + p.getHeight());
+        jLabel9.setText("Weight: " + p.getWeight());
+
     }
 
     /**
@@ -208,12 +207,13 @@ public class Profile extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Profile().setVisible(true);
-                                
+
             }
         });
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -230,6 +230,5 @@ public class Profile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
-
 
 }

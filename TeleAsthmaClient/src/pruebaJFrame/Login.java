@@ -5,31 +5,20 @@
  */
 package pruebaJFrame;
 
-import Patient.Patient;
 import Patient.SharedInfo;
 import Patient.UserLogin;
 import java.awt.Color;
 import static java.awt.Color.white;
 import java.awt.Font;
-import java.awt.PopupMenu;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
 import java.net.Socket;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import teleasthmaclient.TeleAsthmaClient;
 
 /**
@@ -37,20 +26,20 @@ import teleasthmaclient.TeleAsthmaClient;
  * @author Sofia
  */
 public class Login extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form Login
      */
-    public Login() throws MalformedURLException, IOException {
+    public Login() {
         initComponents();
-        Color backColor=new Color(143, 217, 223);
-        Color buttonColor=new Color(7, 100, 117 );
+        Color backColor = new Color(143, 217, 223);
+        Color buttonColor = new Color(7, 100, 117);
         javax.swing.border.Border line = BorderFactory.createLineBorder(backColor, 3);
-        ((JComponent)getContentPane()).setBorder(line);
+        ((JComponent) getContentPane()).setBorder(line);
         this.getContentPane().setBackground(white);
-        Font font=new Font("Helvetica", Font.LAYOUT_LEFT_TO_RIGHT, 20);
-        Font font2=new Font("Helvetica", Font.BOLD, 15);
-        Font font3=new Font("HelveticaBold", Font.ITALIC, 30);
+        Font font = new Font("Helvetica", Font.LAYOUT_LEFT_TO_RIGHT, 20);
+        Font font2 = new Font("Helvetica", Font.BOLD, 15);
+        Font font3 = new Font("HelveticaBold", Font.ITALIC, 30);
         this.jLabel1.setFont(font);
         this.jLabel2.setFont(font);
         this.jLabel4.setFont(font3);
@@ -63,7 +52,7 @@ public class Login extends javax.swing.JFrame {
         buttonLogin.setBackground(buttonColor);
         buttonLogin.setForeground(Color.white);
         buttonLogin.setFont(font2);
-      
+
     }
 
     /**
@@ -187,30 +176,19 @@ public class Login extends javax.swing.JFrame {
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         try {
-            // TODO add your handling code here:
             String password = new String(textPassword.getPassword());
             UserLogin ul = UserLogin.createUserLogin(textUser.getText(), password);
-            //readPatient(p);
             SharedInfo.getInstance().setUl(ul);
             System.out.println(ul);
-            //Data data = SharedInfo.getInstance().getData();
-            //data.setId(p.getId());
-            //SharedInfo.getInstance().setData(data);
             Socket socket = new Socket("localhost", 9000);
             SharedInfo.getInstance().setSocket(socket);
             SharedInfo.getInstance().setOos(new ObjectOutputStream(socket.getOutputStream()));
             SharedInfo.getInstance().setOis(new ObjectInputStream(socket.getInputStream()));
             SharedInfo.getInstance().setIs(socket.getInputStream());
-            //ObjectInputStream ois= SharedInfo.getInstance().getOis();
-            //ObjectOutputStream oos= SharedInfo.getInstance().getOos();
-            //InputStream is= SharedInfo.getInstance().getIs();
             TeleAsthmaClient.socketClient(ul);
-            //TeleAsthmaClient.socketClient(data);
             System.out.println(SharedInfo.getInstance().getData().getId());
             this.setVisible(false);
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonLoginActionPerformed
@@ -254,11 +232,7 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new Login().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new Login().setVisible(true);
             }
         });
     }
@@ -277,6 +251,4 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField textUser;
     // End of variables declaration//GEN-END:variables
 
-    
 }
-

@@ -5,18 +5,12 @@
  */
 package pruebaJFrame;
 
-import Patient.Data;
 import Patient.Fecha;
 import Patient.Patient;
-import Patient.Patient.GENDER;
-import static Patient.Patient.createPatient;
-import static Patient.Patient.readPatient;
 import Patient.SharedInfo;
 import java.awt.Color;
 import static java.awt.Color.white;
 import java.awt.Font;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -27,7 +21,6 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import teleasthmaclient.TeleAsthmaClient;
 
 /**
@@ -375,44 +368,53 @@ public class Register extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     public void windowRegister(int i) throws IOException {
-        if (i == 4) {
-            Object[] options = {"Exit", "Cancel"};
-            int eleccion = JOptionPane.showOptionDialog(rootPane, "User already exists, login or try again", "Mensaje de Confirmacion",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE, null, options, "Exit");
-            if (eleccion == JOptionPane.YES_OPTION) {
-                Login log=new Login();
-                log.setVisible(true);
+        switch (i) {
+            case 4: {
+                Object[] options = {"Exit", "Cancel"};
+                int eleccion = JOptionPane.showOptionDialog(rootPane, "User already exists, login or try again", "Mensaje de Confirmacion",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE, null, options, "Exit");
+                if (eleccion == JOptionPane.YES_OPTION) {
+                    Login log = new Login();
+                    log.setVisible(true);
+                }
+                break;
             }
-        } else if (i == 5) {
-            Object[] options = {"OK"};
-            int eleccion2 = JOptionPane.showOptionDialog(rootPane, "User registered", "Mensaje de Confirmacion",
-                    JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "OK");
+            case 5: {
+                Object[] options = {"OK"};
+                int eleccion2 = JOptionPane.showOptionDialog(rootPane, "User registered", "Mensaje de Confirmacion",
+                        JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "OK");
+                if (eleccion2 == JOptionPane.OK_OPTION) {
+                    MainPage main = new MainPage();
+                    main.setVisible(true);
 
-            if (eleccion2 == JOptionPane.OK_OPTION) {
-                MainPage main = new MainPage();
-                main.setVisible(true);
-
+                }
+                break;
             }
-         } else if (i == 6) {
-            Object[] options = {"OK"};
-            int eleccion2 = JOptionPane.showOptionDialog(rootPane, "Login correct", "Mensaje de Confirmacion",
-                    JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "OK");
+            case 6: {
+                Object[] options = {"OK"};
+                int eleccion2 = JOptionPane.showOptionDialog(rootPane, "Login correct", "Mensaje de Confirmacion",
+                        JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "OK");
+                if (eleccion2 == JOptionPane.OK_OPTION) {
+                    MainPage main = new MainPage();
+                    main.setVisible(true);
 
-            if (eleccion2 == JOptionPane.OK_OPTION) {
-                MainPage main = new MainPage();
-                main.setVisible(true);
-
+                }
+                break;
             }
-        } else if (i == 7) {
-            Object[] options = {"OK"};
-            int eleccion = JOptionPane.showOptionDialog(rootPane, "Login incorrect. Username or Password incorrect. Try again ", "Mensaje de Confirmacion",
-                    JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "OK");
-            if (eleccion == JOptionPane.OK_OPTION) {
-                Login log=new Login();
-                log.setVisible(true);
+            case 7: {
+                Object[] options = {"OK"};
+                int eleccion = JOptionPane.showOptionDialog(rootPane, "Login incorrect. Username or Password incorrect. Try again ", "Mensaje de Confirmacion",
+                        JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "OK");
+                if (eleccion == JOptionPane.OK_OPTION) {
+                    Login log = new Login();
+                    log.setVisible(true);
+                }
+                break;
             }
-        } 
+            default:
+                break;
+        }
     }
     private void heightTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heightTextActionPerformed
         // TODO add your handling code here:
@@ -438,7 +440,8 @@ public class Register extends javax.swing.JFrame {
 
         return resultado;
     }
-     public static boolean isInt(String cadena) {
+
+    public static boolean isInt(String cadena) {
 
         boolean resultado;
 
@@ -451,31 +454,32 @@ public class Register extends javax.swing.JFrame {
 
         return resultado;
     }
-      public static int comprobarDia(String mes) {
 
-        int resultado=0;
+    public static int comprobarDia(String mes) {
+
+        int resultado = 0;
 
         try {
-            
-            if(Integer.parseInt(mes)==2){
-            resultado = 28;    
+
+            if (Integer.parseInt(mes) == 2) {
+                resultado = 28;
             }
-            if(Integer.parseInt(mes)==9||Integer.parseInt(mes)==11||Integer.parseInt(mes)==6||Integer.parseInt(mes)==4){
-            resultado = 30;    
+            if (Integer.parseInt(mes) == 9 || Integer.parseInt(mes) == 11 || Integer.parseInt(mes) == 6 || Integer.parseInt(mes) == 4) {
+                resultado = 30;
             }
-            if(Integer.parseInt(mes)==1||Integer.parseInt(mes)==3||Integer.parseInt(mes)==5||Integer.parseInt(mes)==7||Integer.parseInt(mes)==8||Integer.parseInt(mes)==10||Integer.parseInt(mes)==12){
-            resultado = 31;    
+            if (Integer.parseInt(mes) == 1 || Integer.parseInt(mes) == 3 || Integer.parseInt(mes) == 5 || Integer.parseInt(mes) == 7 || Integer.parseInt(mes) == 8 || Integer.parseInt(mes) == 10 || Integer.parseInt(mes) == 12) {
+                resultado = 31;
             }
-            
+
         } catch (NumberFormatException excepcion) {
-           resultado = -1;
+            resultado = -1;
         }
 
         return resultado;
     }
-     
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //DNItext  = new JTextField();        // TODO add your handling code here:
+
         String id = "";
         String pw = "";
         String weight = "";
@@ -485,86 +489,73 @@ public class Register extends javax.swing.JFrame {
         String day = "";
         String month = "";
         String year = "";
-        String gender="";
+        String gender = "";
         Boolean correct = true;
-       
+
         if (DNItext.getText().length() != 8) {
             id = "Invalid ID: 8 characters | ";
-            correct=false;
+            correct = false;
         }
         if (passwordText.getText().length() <= 8) {
             pw = "Insecure password: Minimum 8 characters | ";
-            correct=false;
+            correct = false;
         }
         if (!isNumeric(weightText.getText())) {
             weight = "Invalid weight | ";
-            correct=false;
+            correct = false;
         }
         if (isNumeric(doctorText.getText())) {
             doctor = "Invalid Doctor | ";
-            correct=false;
+            correct = false;
         }
         if (!isNumeric(heightText.getText())) {
             height = "Invalid Height | ";
-            correct=false;
+            correct = false;
         }
         if (isNumeric(asthmaText.getText())) {
             asthmaT = "Invalid Asthma Type | ";
-            correct=false;
+            correct = false;
         }
-        if (!isInt(dobDay.getText())||Integer.parseInt(dobDay.getText())>comprobarDia(dobMonth.getText())||Integer.parseInt(dobDay.getText())<=0) {
+        if (!isInt(dobDay.getText()) || Integer.parseInt(dobDay.getText()) > comprobarDia(dobMonth.getText()) || Integer.parseInt(dobDay.getText()) <= 0) {
             day = "Invalid Day | ";
-            correct=false;
+            correct = false;
         }
-        if (!isInt(dobMonth.getText())||Integer.parseInt(dobMonth.getText())>12||Integer.parseInt(dobMonth.getText())<1) {
+        if (!isInt(dobMonth.getText()) || Integer.parseInt(dobMonth.getText()) > 12 || Integer.parseInt(dobMonth.getText()) < 1) {
             month = "Invalid Month | ";
-            correct=false;
+            correct = false;
         }
-        if (!isInt(dobYear.getText())||Integer.parseInt(dobYear.getText())<1900) {
+        if (!isInt(dobYear.getText()) || Integer.parseInt(dobYear.getText()) < 1900) {
             year = "Invalid Year | ";
-            correct=false;
+            correct = false;
         }
-        
-        if(genderText.getText().endsWith("on")){
-            gender= "Choose a gender option | ";
-            correct=false;
-        }
-        jLabel14.setText("<html><center>" +id + pw + weight+ height + asthmaT+ doctor+day+month+year+gender+"</center></html>");
-        
-       
-        
-        Fecha f = new Fecha(dobDay.getText(), dobMonth.getText(), dobYear.getText());
-        if(correct){
-           
-        try {
-           
-            Patient p = Patient.createPatient(DNItext.getText(), passwordText.getText(), nameText.getText(), surnameText.getText(), f, Float.parseFloat(weightText.getText()), Float.parseFloat(heightText.getText()), asthmaText.getText(), doctorText.getText(), genderText.getText());
 
-            //readPatient(p);
-            SharedInfo.getInstance().setPatient(p);
-            //Data data = SharedInfo.getInstance().getData();
-            //data.setId(p.getId());
-            //SharedInfo.getInstance().setData(data);
-            Socket socket = new Socket("localhost", 9000);
-            SharedInfo.getInstance().setSocket(socket);
-            SharedInfo.getInstance().setOos(new ObjectOutputStream(socket.getOutputStream()));
-            SharedInfo.getInstance().setOis(new ObjectInputStream(socket.getInputStream()));
-            SharedInfo.getInstance().setIs(socket.getInputStream());
-            //ObjectInputStream ois= SharedInfo.getInstance().getOis();
-            //ObjectOutputStream oos= SharedInfo.getInstance().getOos();
-            InputStream is= SharedInfo.getInstance().getIs();
-            this.setVisible(false);
-            
-            TeleAsthmaClient.socketClient(p);
-            
-            //TeleAsthmaClient.socketClient(data);
-            //System.out.println(SharedInfo.getInstance().getData().getId());
-        }catch(IllegalArgumentException e) {
-             jLabel15.setText("<html><center> !!!Choose a gender option </center></html>");
-        } catch (IOException | ClassNotFoundException ex ) {
-            Logger.getLogger(Register.class
-                    .getName()).log(Level.SEVERE, null, ex);
+        if (genderText.getText().endsWith("on")) {
+            gender = "Choose a gender option | ";
+            correct = false;
         }
+        jLabel14.setText("<html><center>" + id + pw + weight + height + asthmaT + doctor + day + month + year + gender + "</center></html>");
+
+        Fecha f = new Fecha(dobDay.getText(), dobMonth.getText(), dobYear.getText());
+        if (correct) {
+
+            try {
+
+                Patient p = Patient.createPatient(DNItext.getText(), passwordText.getText(), nameText.getText(), surnameText.getText(), f, Float.parseFloat(weightText.getText()), Float.parseFloat(heightText.getText()), asthmaText.getText(), doctorText.getText(), genderText.getText());
+                SharedInfo.getInstance().setPatient(p);
+                Socket socket = new Socket("localhost", 9000);
+                SharedInfo.getInstance().setSocket(socket);
+                SharedInfo.getInstance().setOos(new ObjectOutputStream(socket.getOutputStream()));
+                SharedInfo.getInstance().setOis(new ObjectInputStream(socket.getInputStream()));
+                SharedInfo.getInstance().setIs(socket.getInputStream());
+                this.setVisible(false);
+                TeleAsthmaClient.socketClient(p);
+
+            } catch (IllegalArgumentException e) {
+                jLabel15.setText("<html><center> !!!Choose a gender option </center></html>");
+            } catch (IOException | ClassNotFoundException ex) {
+                Logger.getLogger(Register.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -588,14 +579,9 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_genderTextActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            this.setVisible(false);
-            Login log = new Login();
-            log.setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(Register.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
+        this.setVisible(false);
+        Login log = new Login();
+        log.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void passwordTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextActionPerformed

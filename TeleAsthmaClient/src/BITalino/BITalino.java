@@ -47,7 +47,6 @@ import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 
 
-import BITalino.DeviceDiscoverer;
 
 /// The %BITalino device class.
 public class BITalino {

@@ -8,7 +8,6 @@ package pruebaJFrame;
 import BITalino.BITalinoException;
 import BITalino.BitalinoDemo;
 import Patient.Data;
-import Patient.Patient;
 import Patient.SharedInfo;
 import java.awt.Color;
 import static java.awt.Color.white;
@@ -209,6 +208,7 @@ public class RecordECG extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new RecordECG().setVisible(true);
             }
@@ -225,7 +225,5 @@ public class RecordECG extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
-    private String String(Data data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 }

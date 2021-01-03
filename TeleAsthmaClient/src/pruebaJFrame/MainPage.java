@@ -196,9 +196,7 @@ public class MainPage extends javax.swing.JFrame {
             System.out.println(SharedInfo.getInstance().getData());
             TeleAsthmaClient.socketClient(data);
             this.setVisible(false);
-        } catch (IOException ex) {
-            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -237,6 +235,7 @@ public class MainPage extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MainPage().setVisible(true);
             }
